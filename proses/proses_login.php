@@ -1,8 +1,17 @@
 <?php
+session_start();
+
+
+include "connect.php";
+
 $username = (isset($_POST['username'])) ?  htmlentities($_POST['username']) : "";
-$password = (isset($_POST['password'])) ?  htmlentities($_POST['password']) : "";
+$password = (isset($_POST['password'])) ?  md5(htmlentities($_POST['password'])) : "";
+
 if (!empty($_POST['submit_validasi'])) {
-    if ($username == "rifqyfz678@gmail.com" && $password == "rifqy") {
+    $query = mysqli_query($conn,"SELECT * FROM tabel_user WHERE username = '$username' && password = '$password'");
+    $hasil = mysqli_fetch_array($query);
+    if ($hasil) {
+        $_SESSION['username_dapoer'] = $username;
         header('Location: ../index.php');
     } else { ?>
         <script>

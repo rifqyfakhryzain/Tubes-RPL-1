@@ -1,3 +1,10 @@
+<?php
+   session_start();
+   if(!empty($_SESSION['username_dapoer'])) {
+      header('location:index.php');
+   }
+?>
+
 <!doctype html>
 <html>
 
