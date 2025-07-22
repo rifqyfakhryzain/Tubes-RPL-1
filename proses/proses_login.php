@@ -12,6 +12,7 @@ if (!empty($_POST['submit_validasi'])) {
     $hasil = mysqli_fetch_array($query);
     if ($hasil) {
         $_SESSION['username_dapoer'] = $username;
+        $_SESSION['level_dapoer'] = $hasil['level'];
         header('Location: ../index.php');
     } else { ?>
         <script>

@@ -1,3 +1,25 @@
+<?php
+session_start();
+if (empty($_SESSION['username_dapoer'])) {
+    header('location:login.php');
+    exit();
+}
+include 'proses/connect.php';
+
+$username = $_SESSION['username_dapoer'];
+$query = mysqli_query($conn, "SELECT * FROM tabel_user WHERE username = '$username'");
+
+if ($query) {
+    $hasil = mysqli_fetch_assoc($query);
+
+    if ($hasil && isset($hasil['username'])) {
+        // Misal kamu ingin simpan ke variabel saja, bukan langsung tampil
+        $namaPengguna = $hasil['username'];
+    }
+}
+
+?>
+
 <!doctype html>
 <html>
 

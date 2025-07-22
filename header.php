@@ -1,3 +1,4 @@
+
 <!-- navbar -->
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
@@ -28,7 +29,7 @@
                                 Neil Sims
                             </p>
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                neil.sims@flowbite.com
+                                <?php echo $hasil['username'] ?>
                             </p>
                         </div>
                         <ul class="py-1" role="none">

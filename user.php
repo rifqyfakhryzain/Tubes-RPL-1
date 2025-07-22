@@ -1,3 +1,30 @@
+<?php
+session_start();
+if (empty($_SESSION['username_dapoer'])) {
+    header('Location: login.php');
+    exit();
+}
+
+if ($_SESSION['level_dapoer'] != 1) {
+    // Jika bukan level 1, redirect ke halaman utama
+    header('location: index.php');
+    exit();
+}
+
+
+include 'proses/connect.php';
+
+
+$username = $_SESSION['username_dapoer'];
+$query = mysqli_query($conn, "SELECT * FROM tabel_user WHERE username = '$username'");
+
+if ($query) {
+    $hasil = mysqli_fetch_assoc($query);
+}
+?>
+
+
+
 <!doctype html>
 <html>
 
