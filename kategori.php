@@ -32,7 +32,7 @@
             <!-- Konten -->
             <div class="space-y-4">
                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                  Ini adalah halaman home
+                  Ini adalah halaman Kategori Menu
                </h2>
                <p class="text-gray-600 dark:text-gray-400">
                   Empower Developers, IT Ops, and business teams to collaborate at high velocity. Respond to changes and deliver great customer and employee service experiences fast.
