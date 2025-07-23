@@ -306,13 +306,18 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Level -->
                   <div class="col-span-2 sm:col-span-1">
                      <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
-                     <select name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?php echo $row['level'] ?>">
-                        <option value="" disabled selected hidden>Pilih Level User</option>
-                        <option value="1">Owner/Admin</option>
-                        <option value="2">Kasir</option>
-                        <option value="3">Pelayan</option>
-                        <option value="4">Dapur</option>
-                     </select>
+                     <input name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                     value="<?php if($row['level']==1){
+                        echo 'Admin';
+                     }elseif($row['level']== 2){
+                        echo 'Kasir';
+                     }elseif($row['level']== 3){
+                        echo 'Pelayan';
+                     }elseif($row['level']== 4){
+                        echo 'Dapur';
+                     }
+                     ?>">
+                     </input>
                   </div>
                   <!-- No HP -->
                   <div class="col-span-2">
