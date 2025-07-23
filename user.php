@@ -123,7 +123,16 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                               </td>
                               <td class="px-6 py-4">
-                                 <?php echo $row['level'] ?>
+                                 <?php if ($row['level'] == 1) {
+                                    echo 'Admin';
+                                 } elseif ($row['level'] == 2) {
+                                    echo 'Kasir';
+                                 } elseif ($row['level'] == 3) {
+                                    echo 'Pelayan';
+                                 } elseif ($row['level'] == 4) {
+                                    echo 'Dapur';
+                                 }
+                                 ?>
                               </td>
                               <td class="px-6 py-4">
                                  <?php echo $row['no_hp'] ?>
@@ -267,73 +276,73 @@ while ($record = mysqli_fetch_assoc($query)) {
 
    <?php
    foreach ($result as $row) { ?>
-   <!-- Modal Lihat USer -->
-   <!-- Main modal -->
-   <div id="lihat-modal-<?php echo $row['id']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative p-4 w-full max-w-md max-h-full">
-         <!-- Modal content -->
-         <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-               <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  Lihat User
-               </h3>
-               <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="lihat-modal-<?php echo $row['id']; ?>">
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                  </svg>
-                  <span class="sr-only">Close modal</span>
-               </button>
-            </div>
-            <!-- Modal body dan Form -->
-            <form action="proses/proses.input.php" method="POST" class="p-4 md:p-5">
-               <div class="grid gap-4 mb-4 grid-cols-2">
-                  <!-- Nama -->
-                  <div class="col-span-2">
-                     <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                     <input disabled type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama'] ?>">
-                  </div>
-                  <!-- Username -->
-                  <div class="col-span-2">
-                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                     <input disabled type="email" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="" value="<?php echo $row['username'] ?>">
-                  </div>
-                  <!-- Password -->
-                  <div class="col-span-2 sm:col-span-1">
-                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                     <input disabled type="name" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required=""value="<?php echo $row['password'] ?>" >
-                  </div>
-                  <!-- Level -->
-                  <div class="col-span-2 sm:col-span-1">
-                     <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
-                     <input disabled name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
-                     value="<?php if($row['level']==1){
-                        echo 'Admin';
-                     }elseif($row['level']== 2){
-                        echo 'Kasir';
-                     }elseif($row['level']== 3){
-                        echo 'Pelayan';
-                     }elseif($row['level']== 4){
-                        echo 'Dapur';
-                     }
-                     ?>">
-                     </input>
-                  </div>
-                  <!-- No HP -->
-                  <div class="col-span-2">
-                     <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
-                     <input disabled type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="N HP" required="" value="<?php echo $row['no_hp'] ?>">
-                  </div>
-                  <!-- Alamat -->
-                  <div class="col-span-2">
-                     <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Alamat</label>
-                     <textarea disabled name="alamat" id="alamat" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat description here" > <?php echo $row['alamat']; ?></textarea>
-                  </div>
+      <!-- Modal Lihat USer -->
+      <!-- Main modal -->
+      <div id="lihat-modal-<?php echo $row['id']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+         <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+               <!-- Modal header -->
+               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                     Lihat User
+                  </h3>
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="lihat-modal-<?php echo $row['id']; ?>">
+                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                     </svg>
+                     <span class="sr-only">Close modal</span>
+                  </button>
                </div>
-            </form>
+               <!-- Modal body dan Form -->
+               <form action="proses/proses.input.php" method="POST" class="p-4 md:p-5">
+                  <div class="grid gap-4 mb-4 grid-cols-2">
+                     <!-- Nama -->
+                     <div class="col-span-2">
+                        <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                        <input disabled type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama'] ?>">
+                     </div>
+                     <!-- Username -->
+                     <div class="col-span-2">
+                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                        <input disabled type="email" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="" value="<?php echo $row['username'] ?>">
+                     </div>
+                     <!-- Password -->
+                     <div class="col-span-2 sm:col-span-1">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <input disabled type="name" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required="" value="<?php echo $row['password'] ?>">
+                     </div>
+                     <!-- Level -->
+                     <div class="col-span-2 sm:col-span-1">
+                        <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
+                        <input disabled name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           value="<?php if ($row['level'] == 1) {
+                                       echo 'Admin';
+                                    } elseif ($row['level'] == 2) {
+                                       echo 'Kasir';
+                                    } elseif ($row['level'] == 3) {
+                                       echo 'Pelayan';
+                                    } elseif ($row['level'] == 4) {
+                                       echo 'Dapur';
+                                    }
+                                    ?>">
+                        </input>
+                     </div>
+                     <!-- No HP -->
+                     <div class="col-span-2">
+                        <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
+                        <input disabled type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="N HP" required="" value="<?php echo $row['no_hp'] ?>">
+                     </div>
+                     <!-- Alamat -->
+                     <div class="col-span-2">
+                        <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Alamat</label>
+                        <textarea disabled name="alamat" id="alamat" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat description here"> <?php echo $row['alamat']; ?></textarea>
+                     </div>
+                  </div>
+               </form>
+            </div>
          </div>
       </div>
-   </div>
    <?php } ?>
 
    <!-- modal Delete -->
