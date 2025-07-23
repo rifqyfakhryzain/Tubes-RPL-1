@@ -6,7 +6,7 @@ $username = isset($_POST['username']) ? htmlentities($_POST['username']) : "";
 $level = isset($_POST['level']) ? htmlentities($_POST['level']) : "";
 $no_hp = isset($_POST['no_hp']) ? htmlentities($_POST['no_hp']) : "";
 $alamat = isset($_POST['alamat']) ? htmlentities($_POST['alamat']) : "";
-$password = isset($_POST['password']) ? md5(htmlentities($_POST['password'])) : "";
+$password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : "";
 
 $message = "";
 
