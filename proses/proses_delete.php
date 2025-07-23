@@ -1,26 +1,20 @@
 <?php
-include "../connect.php";
+include "connect.php";
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$id = isset($_POST['id']) ? htmlentities($_POST['id']) : "";
 
-if ($id > 0) {
-    $query = mysqli_query($conn, "DELETE FROM tabel_user WHERE id = $id");
+if (isset($_POST['delete_user_validate'])) {
+    if ($id == "") {
+        echo "<script>alert('ID tidak ditemukan.'); window.history.back();</script>";
+        exit;
+    }
+
+    $query = mysqli_query($conn, "DELETE FROM tabel_user WHERE id = '$id'");
 
     if ($query) {
-        echo "<script>
-                alert('Data berhasil dihapus');
-                window.location.href='../user.php';
-              </script>";
+        echo "<script>alert('Data berhasil dihapus.'); window.location.href='../user.php';</script>";
     } else {
-        echo "<script>
-                alert('Gagal menghapus data');
-                window.history.back();
-              </script>";
+        echo "<script>alert('Gagal Menghapus data: " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
-} else {
-    echo "<script>
-            alert('ID tidak valid');
-            window.history.back();
-          </script>";
 }
 ?>
