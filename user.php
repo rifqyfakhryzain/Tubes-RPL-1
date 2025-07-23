@@ -231,16 +231,16 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <input type="name" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required="">
                   </div>
                   <!-- Level -->
-                  <div class="col-span-2 sm:col-span-1">
-                     <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
-                     <select name="level" id="level" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option selected="">Pilih Level User</option>
-                        <option value="1">Owner/Admin</option>
-                        <option value="2">Kasir</option>
-                        <option value="3">Pelayan</option>
-                        <option value="4">Dapur</option>
-                     </select>
-                  </div>
+<div class="col-span-2 sm:col-span-1">
+  <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
+  <select name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+    <option value="" disabled selected hidden>Pilih Level User</option>
+    <option value="1">Owner/Admin</option>
+    <option value="2">Kasir</option>
+    <option value="3">Pelayan</option>
+    <option value="4">Dapur</option>
+  </select>
+</div>
                    <!-- No HP -->
                   <div class="col-span-2">
                      <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
@@ -257,7 +257,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                   </svg>
-                  Add new product
+                  Tambah User
                </button>
             </form>
          </div>
