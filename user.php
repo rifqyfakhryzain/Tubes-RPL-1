@@ -213,45 +213,47 @@ while ($record = mysqli_fetch_assoc($query)) {
                </button>
             </div>
             <!-- Modal body dan Form -->
-            <form action="proses/proses.input.php" method="POST" class="p-4 md:p-5">
+           <form action="proses/proses.input.php" method="POST" class="p-4 md:p-5">
                <div class="grid gap-4 mb-4 grid-cols-2">
                   <!-- Nama -->
                   <div class="col-span-2">
-                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                     <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="">
+                     <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                     <input type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="">
                   </div>
                   <!-- Username -->
                   <div class="col-span-2">
-                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                     <input type="email" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="">
+                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                     <input type="email" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="">
                   </div>
                   <!-- Password -->
                   <div class="col-span-2 sm:col-span-1">
-                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                     <input type="name" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required="">
+                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                     <input type="name" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required="">
                   </div>
+                  <!-- Level -->
                   <div class="col-span-2 sm:col-span-1">
-                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
-                     <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                     <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
+                     <select name="level" id="level" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected="">Pilih Level User</option>
-                        <option value="owner">Owner/Admin</option>
-                        <option value="kasir">Kasir</option>
-                        <option value="pelayan">Pelayan</option>
-                        <option value="dapur">Dapur</option>
+                        <option value="1">Owner/Admin</option>
+                        <option value="2">Kasir</option>
+                        <option value="3">Pelayan</option>
+                        <option value="4">Dapur</option>
                      </select>
                   </div>
                    <!-- No HP -->
                   <div class="col-span-2">
-                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
-                     <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="N HP" required="">
+                     <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
+                     <input type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="N HP" required="">
                   </div>
                   <!-- Alamat -->
                   <div class="col-span-2">
-                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Alamat</label>
-                     <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat description here"></textarea>
+                     <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Alamat</label>
+                     <textarea name="alamat" id="alamat" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat description here"></textarea>
                   </div>
                </div>
-               <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+               <!-- SUbmit -->
+               <button type="submit" name="input_user_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                   </svg>
