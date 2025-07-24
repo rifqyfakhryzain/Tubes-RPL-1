@@ -354,18 +354,18 @@ while ($record = mysqli_fetch_assoc($query)) {
                      </div>
                      <!-- Keterangan -->
                      <div class="col-span-2">
-                        <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                        <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
                         <input type="text" name="keterangan" id="keterangan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="" value="<?php echo $row['keterangan'] ?>">
                      </div>
                      <!-- Harga -->
                      <div class="col-span-2 sm:col-span-1">
-                        <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password (Opsional)</label>
+                        <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
                         <input type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga"  value="<?php echo $row['harga'] ?>">
                      </div>
 
                      <!-- Kategori -->
                      <div class="col-span-2 sm:col-span-1">
-                        <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
+                        <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
                         <!-- <input name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"> -->
                         <select name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
