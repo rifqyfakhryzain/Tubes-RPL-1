@@ -21,7 +21,7 @@ $hasil = mysqli_fetch_assoc($query_user);
 
 // Data untuk tabel semua user
 $result = [];
-$query = mysqli_query($conn, "SELECT * FROM tabel_user");
+$query = mysqli_query($conn, "SELECT * FROM tabel_daftar_menu");
 while ($record = mysqli_fetch_assoc($query)) {
    $result[] = $record;
 }
@@ -68,13 +68,13 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Button Tambah User -->
                   <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                     Tambah User
+                     Tambah Menu
                   </button>
                </div>
 
                <?php
                if (empty($result)) {
-                  echo "Data user tidak ada";
+                  echo "Data Menu tidak ada";
                } else {
 
 
@@ -87,16 +87,16 @@ while ($record = mysqli_fetch_assoc($query)) {
                               No
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              Nama
+                              Nama Menu
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              Username
+                              Keterangan
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              Level
+                              Kategori
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              No HP
+                              Harga
                            </th>
                            <th scope="col" class="px-6 py-3">
                               Aksi
@@ -116,26 +116,25 @@ while ($record = mysqli_fetch_assoc($query)) {
                                  <?= $no++; ?>
                               </th>
                               <td class="px-6 py-4">
-                                 <?php echo $row['nama'] ?>
+                                 <?php echo $row['nama_menu'] ?>
                               </td>
                               <td class="px-6 py-4">
-                                 <?php echo $row['username'] ?>
+                                 <?php echo $row['keterangan'] ?>
 
                               </td>
+
+
                               <td class="px-6 py-4">
-                                 <?php if ($row['level'] == 1) {
-                                    echo 'Admin';
-                                 } elseif ($row['level'] == 2) {
-                                    echo 'Kasir';
-                                 } elseif ($row['level'] == 3) {
-                                    echo 'Pelayan';
-                                 } elseif ($row['level'] == 4) {
-                                    echo 'Dapur';
+                                 <?php if ($row['kategori'] == 1) {
+                                    echo 'Makanan';
+                                 } elseif ($row['kategori'] == 2) {
+                                    echo 'Minuman';
                                  }
                                  ?>
                               </td>
+
                               <td class="px-6 py-4">
-                                 <?php echo $row['no_hp'] ?>
+                                 <?php echo $row['harga'] ?>
                               </td>
                               <td class="px-6 py-4">
                                  <div class="flex gap-2">
@@ -213,7 +212,7 @@ while ($record = mysqli_fetch_assoc($query)) {
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                  Tambah User
+                  Tambah Menu
                </h3>
                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -223,52 +222,39 @@ while ($record = mysqli_fetch_assoc($query)) {
                </button>
             </div>
             <!-- Modal body dan Form -->
-            <form action="proses/proses.input.php" method="POST" class="p-4 md:p-5">
+            <form action="proses/proses_input_menu.php" method="POST" class="p-4 md:p-5">
                <div class="grid gap-4 mb-4 grid-cols-2">
-                  <!-- Nama -->
+                  <!-- Nama Menu-->
                   <div class="col-span-2">
-                     <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                     <input type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="">
+                     <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
+                     <input type="text" name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Menu" required="">
                   </div>
-                  <!-- Username -->
+                  <!-- Keterangan -->
                   <div class="col-span-2">
-                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                     <input type="email" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="">
+                     <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
+                     <input type="text" name="keterangan" id="keterangan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Keterangan" required="">
                   </div>
-                  <!-- Password -->
+                  <!-- Harga -->
                   <div class="col-span-2 sm:col-span-1">
-                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                     <input type="name" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required="">
+                     <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+                     <input type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga" required="">
                   </div>
-                  <!-- Level -->
+                  <!-- Kategori -->
                   <div class="col-span-2 sm:col-span-1">
-                     <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
-                     <select name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option value="" disabled selected hidden>Pilih Level User</option>
-                        <option value="1">Owner/Admin</option>
-                        <option value="2">Kasir</option>
-                        <option value="3">Pelayan</option>
-                        <option value="4">Dapur</option>
+                     <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                     <select name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option value="" disabled selected hidden>Pilih Kategori</option>
+                        <option value="1">Makanan</option>
+                        <option value="2">Minuman</option>
                      </select>
                   </div>
-                  <!-- No HP -->
-                  <div class="col-span-2">
-                     <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
-                     <input type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="N HP" required="">
-                  </div>
-                  <!-- Alamat -->
-                  <div class="col-span-2">
-                     <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Alamat</label>
-                     <textarea name="alamat" id="alamat" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat description here"></textarea>
-                  </div>
-               </div>
-               <!-- SUbmit -->
-               <button type="submit" name="input_user_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                  </svg>
-                  Tambah User
-               </button>
+                  <!-- SUbmit -->
+                  <button type="submit" name="input_menu_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                     </svg>
+                     Tambah Menu
+                  </button>
             </form>
          </div>
       </div>
@@ -295,48 +281,35 @@ while ($record = mysqli_fetch_assoc($query)) {
                   </button>
                </div>
                <!-- Modal body dan Form -->
-               <form action="proses/proses.input.php" method="POST" class="p-4 md:p-5">
+               <form action="proses/proses_input_menu.php" method="POST" class="p-4 md:p-5">
                   <div class="grid gap-4 mb-4 grid-cols-2">
-                     <!-- Nama -->
+                     <!-- Nama Menu -->
                      <div class="col-span-2">
-                        <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                        <input disabled type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama'] ?>">
+                        <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
+                        <input disabled type="text" name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama_menu" required="" value="<?php echo $row['nama_menu'] ?>">
                      </div>
-                     <!-- Username -->
+                     <!-- Keterangan -->
                      <div class="col-span-2">
-                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                        <input disabled type="email" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="" value="<?php echo $row['username'] ?>">
+                        <label for="Keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
+                        <input disabled type="text" name="Keterangan" id="Keterangan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="keterangan" required="" value="<?php echo $row['keterangan'] ?>">
                      </div>
-                     <!-- Password -->
+                     <!-- harga -->
                      <div class="col-span-2 sm:col-span-1">
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                        <input disabled type="name" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required="" value="<?php echo substr($row['password'], 0, 8); ?>">
+                        <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+                        <input disabled type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga" required="" value="<?php ['harga'] ?>">
                      </div>
-                     <!-- Level -->
+                     <!-- Kategori -->
                      <div class="col-span-2 sm:col-span-1">
-                        <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
-                        <input disabled name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                           value="<?php if ($row['level'] == 1) {
-                                       echo 'Admin';
-                                    } elseif ($row['level'] == 2) {
-                                       echo 'Kasir';
-                                    } elseif ($row['level'] == 3) {
-                                       echo 'Pelayan';
-                                    } elseif ($row['level'] == 4) {
-                                       echo 'Dapur';
+                        <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level User</label>
+                        <input disabled name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                           value="<?php if ($row['kategori'] == 1) {
+                                       echo 'Makanan';
+                                    } elseif ($row['kategori'] == 2) {
+                                       echo 'minuman';
                                     }
+
                                     ?>">
                         </input>
-                     </div>
-                     <!-- No HP -->
-                     <div class="col-span-2">
-                        <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NO HP</label>
-                        <input disabled type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="N HP" required="" value="<?php echo $row['no_hp'] ?>">
-                     </div>
-                     <!-- Alamat -->
-                     <div class="col-span-2">
-                        <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Alamat</label>
-                        <textarea disabled name="alamat" id="alamat" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat description here"> <?php echo $row['alamat']; ?></textarea>
                      </div>
                   </div>
                </form>
