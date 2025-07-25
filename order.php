@@ -24,7 +24,7 @@ $result = [];
 $query = mysqli_query($conn, "SELECT tabel_order.*,nama, SUM(harga*jumlah) AS harganya FROM tabel_order
 LEFT JOIN tabel_user ON tabel_user.id = tabel_order.pelayan
 LEFT JOIN tabel_list_order ON tabel_list_order.order = tabel_order.id_order
-LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
+
 GROUP BY id_order");
 while ($record = mysqli_fetch_assoc($query)) {
    $result[] = $record;
