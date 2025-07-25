@@ -64,7 +64,7 @@ while ($record = mysqli_fetch_assoc($query)) {
          <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg p-10 space-y-6">
 
             <!-- Judul About -->
-            <h3 class="text-1xl font-bold text-grey-900 dark:text-white">Halaman Order</h3>
+            <h3 class="text-1xl font-bold text-grey-900 dark:text-white">Halaman</h3>
 
             <!-- Konten -->
             <div class="relative overflow-x-auto">
