@@ -21,7 +21,9 @@ $hasil = mysqli_fetch_assoc($query_user);
 
 // Data untuk tabel semua user
 $result = [];
-$query = mysqli_query($conn, "SELECT * FROM tabel_order");
+$query = mysqli_query($conn, "SELECT tabel_order.*, tabel_user.nama AS nama_pelayan
+FROM tabel_order
+JOIN tabel_user ON tabel_order.pelayan = tabel_user.id");
 while ($record = mysqli_fetch_assoc($query)) {
    $result[] = $record;
 }
@@ -135,12 +137,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                               </td>
                               <!-- Meja -->
                               <td class="px-6 py-4">
-                                 <?php if ($row['meja'] == 1) {
-                                    echo 'Tes';
-                                 } elseif ($row['meja'] == 2) {
-                                    echo 'Coba';
-                                 }
-                                 ?>
+                                 <?php echo $row['meja'] ?>
+                                 
                               </td>
                               <!-- Total Harga -->
                               <td class="px-6 py-4">
@@ -148,11 +146,17 @@ while ($record = mysqli_fetch_assoc($query)) {
                               </td>
                               <!-- Pelayan -->
                               <td class="px-6 py-4">
-                                 <?php echo $row['pelayan'] ?>
+                                 <?php echo $row['nama_pelayan'] ?>
                               </td>
                               <!-- Status -->
                               <td class="px-6 py-4">
-                                 <?php echo $row['status'] ?>
+                                
+                                 <?php if ($row['status'] == 1) {
+                                    echo 'Masuk Dapur';
+                                 } elseif ($row['status'] == 2) {
+                                    echo 'Makanan tersedia';
+                                 }
+                                 ?>
                               </td>
                               <!-- Waktu Order -->
                               <td class="px-6 py-4">
@@ -312,7 +316,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <!-- Nama Menu -->
                      <div class="col-span-2">
                         <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
-                        <input type="text"  disabled name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama_menu'] ?>">
+                        <input type="text" disabled name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama_menu'] ?>">
                      </div>
                      <!-- Keterangan -->
                      <div class="col-span-2">
@@ -373,7 +377,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <!-- Nama Menu -->
                      <div class="col-span-2">
                         <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
-                        <input type="text" name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required=""  value="<?php echo $row['nama_menu'] ?>">
+                        <input type="text" name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama_menu'] ?>">
                      </div>
                      <!-- Keterangan -->
                      <div class="col-span-2">
@@ -383,7 +387,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <!-- Harga -->
                      <div class="col-span-2 sm:col-span-1">
                         <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                        <input type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga"  value="<?php echo $row['harga'] ?>">
+                        <input type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga" value="<?php echo $row['harga'] ?>">
                      </div>
 
                      <!-- Kategori -->
