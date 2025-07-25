@@ -21,9 +21,11 @@ $hasil = mysqli_fetch_assoc($query_user);
 
 // Data untuk tabel semua user
 $result = [];
-$query = mysqli_query($conn, "SELECT tabel_order.*, tabel_user.nama AS nama_pelayan
-FROM tabel_order
-JOIN tabel_user ON tabel_order.pelayan = tabel_user.id");
+$query = mysqli_query($conn, "SELECT tabel_order.*,nama, SUM(harga*jumlah) AS harganya FROM tabel_order
+LEFT JOIN tabel_user ON tabel_user.id = tabel_order.pelayan
+LEFT JOIN tabel_list_order ON tabel_list_order.order = tabel_order.id_order
+LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
+GROUP BY id_order");
 while ($record = mysqli_fetch_assoc($query)) {
    $result[] = $record;
 }
@@ -142,11 +144,11 @@ while ($record = mysqli_fetch_assoc($query)) {
                               </td>
                               <!-- Total Harga -->
                               <td class="px-6 py-4">
-                                 <?php echo $row['pelanggan'] ?>
+                                 <?php echo $row['harganya'] ?>
                               </td>
                               <!-- Pelayan -->
                               <td class="px-6 py-4">
-                                 <?php echo $row['nama_pelayan'] ?>
+                                 <?php echo $row['nama'] ?>
                               </td>
                               <!-- Status -->
                               <td class="px-6 py-4">
