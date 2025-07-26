@@ -215,8 +215,8 @@ if ($id_order > 0) {
                                     <b>Total Harga</b>
                                 </td>
                                 <!-- Total Harga -->
-                                <td class="px-6 py-4">
-                                   <b> <?php echo number_format($total,0,',', '.') ?> </b>
+                                <td class="px-6 py-4 font-bold">
+                                    <?php echo number_format($total,0,',', '.') ?>
                                 </td>
                             </tbody>
                         </table>

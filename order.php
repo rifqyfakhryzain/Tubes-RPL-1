@@ -140,7 +140,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               <!-- Meja -->
                               <td class="px-6 py-4">
                                  <?php echo $row['meja'] ?>
-                                 
+
                               </td>
                               <!-- Total Harga -->
                               <td class="px-6 py-4">
@@ -152,7 +152,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               </td>
                               <!-- Status -->
                               <td class="px-6 py-4">
-                                
+
                                  <?php if ($row['status'] == 1) {
                                     echo 'Masuk Dapur';
                                  } elseif ($row['status'] == 2) {
@@ -168,12 +168,17 @@ while ($record = mysqli_fetch_assoc($query)) {
                               <td class="px-6 py-4">
                                  <div class="flex gap-2">
                                     <!-- Button Lihat -->
-                                    <button type="button" data-modal-target="lihat-modal-<?php echo $row['id_order']; ?>" data-modal-toggle="lihat-modal-<?php echo $row['id_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                       <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                          <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                       </svg>
-                                    </button>
+                                    <a href="order_item.php?id_order=<?php echo $row['id_order']; ?>">
+                                       <button type="button"
+                                          class="flex items-center justify-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                          <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                             <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                             <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                          </svg>
+                                          
+                                       </button>
+                                    </a>
+
 
 
 
@@ -290,66 +295,6 @@ while ($record = mysqli_fetch_assoc($query)) {
       </div>
    </div>
 
-   <?php
-   foreach ($result as $row) { ?>
-      <!-- Modal lihat USer -->
-      <!-- Main modal -->
-      <div id="lihat-modal-<?php echo $row['id_order']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-         <div class="relative p-4 w-full max-w-md max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-               <!-- Modal header -->
-               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                     Lihat Order
-                  </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="lihat-modal-<?php echo $row['id_order']; ?>">
-                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                     </svg>
-                     <span class="sr-only">Close modal</span>
-                  </button>
-               </div>
-               <!-- Modal body dan Form -->
-               <form action="proses/proses_edit.php" method="POST" class="p-4 md:p-5">
-                  <input type="hidden" name="id" value="<?php echo $row['id_order']; ?>">
-
-                  <div class="grid gap-4 mb-4 grid-cols-2">
-                     <!-- Nama Menu -->
-                     <div class="col-span-2">
-                        <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
-                        <input type="text" disabled name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama_menu'] ?>">
-                     </div>
-                     <!-- Keterangan -->
-                     <div class="col-span-2">
-                        <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
-                        <input type="text" disabled name="keterangan" id="keterangan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="" value="<?php echo $row['keterangan'] ?>">
-                     </div>
-                     <!-- Harga -->
-                     <div class="col-span-2 sm:col-span-1">
-                        <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                        <input type="text" disabled name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="harga" value="<?php echo $row['harga'] ?>">
-                     </div>
-
-                     <!-- Kategori -->
-                     <div class="col-span-2 sm:col-span-1">
-                        <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                        <input disabled name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                           value="<?php if ($row['kategori'] == 1) {
-                                       echo 'Makanan';
-                                    } elseif ($row['kategori'] == 2) {
-                                       echo 'Minuman';
-                                    }
-                                    ?>">
-                        </input>
-                     </div>
-                  </div>
-
-               </form>
-            </div>
-         </div>
-      </div>
-   <?php } ?>
 
    <?php
    foreach ($result as $row) { ?>
@@ -372,44 +317,25 @@ while ($record = mysqli_fetch_assoc($query)) {
                   </button>
                </div>
                <!-- Modal body dan Form -->
-               <form action="proses/proses_edit_menu.php" method="POST" class="p-4 md:p-5">
-                  <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+               <form action="proses/proses_edit_order.php" method="POST" class="p-4 md:p-5">
+                  <input type="hidden" name="id_order" value="<?php echo $row['id_order']; ?>">
 
                   <div class="grid gap-4 mb-4 grid-cols-2">
-                     <!-- Nama Menu -->
+                     <!-- Kode Order -->
                      <div class="col-span-2">
-                        <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
-                        <input type="text" name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required="" value="<?php echo $row['nama_menu'] ?>">
+                        <label for="kode_order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Order</label>
+                        <input type="text" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="" value="<?php echo $row['kode_order'] ?>">
                      </div>
-                     <!-- Keterangan -->
+                     <!-- Meja -->
                      <div class="col-span-2">
-                        <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
-                        <input type="text" name="keterangan" id="keterangan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" required="" value="<?php echo $row['keterangan'] ?>">
+                        <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Meja</label>
+                        <input type="text" name="meja" id="meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Meja" required="" value="<?php echo $row['meja'] ?>">
                      </div>
-                     <!-- Harga -->
-                     <div class="col-span-2 sm:col-span-1">
-                        <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                        <input type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga" value="<?php echo $row['harga'] ?>">
+                     <!-- Nama Pelanggan -->
+                     <div class="col-span-2">
+                        <label for="pelanggan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pelanggan</label>
+                        <input type="text" name="pelanggan" id="pelanggan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Pelanggan" required="" value="<?php echo $row['pelanggan'] ?>">
                      </div>
-
-                     <!-- Kategori -->
-                     <div class="col-span-2 sm:col-span-1">
-                        <label for="level" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                        <!-- <input name="level" id="level" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"> -->
-                        <select name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-
-                           <?php
-                           $data = array("Makanan", "Minuman");
-                           foreach ($data as $key => $value) {
-                              $level_value = $key + 1; // karena level di DB dimulai dari 1
-                              $selected = ($row["kategori"] == $level_value) ? "selected" : "";
-                              echo "<option value='$level_value' $selected>$value</option>";
-                           }
-                           ?>
-
-                        </select>
-
-
 
                      </div>
 

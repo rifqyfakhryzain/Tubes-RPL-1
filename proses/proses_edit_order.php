@@ -1,7 +1,7 @@
 <?php
 include "connect.php";
 
-$id = isset($_POST['id']) ? htmlentities($_POST['id']) : "";
+$ = isset($_POST['id']) ? htmlentities($_POST['id']) : "";
 $nama_menu = isset($_POST['nama_menu']) ? htmlentities($_POST['nama_menu']) : "";
 $keterangan = isset($_POST['keterangan']) ? htmlentities($_POST['keterangan']) : "";
 $kategori = isset($_POST['kategori']) ? htmlentities($_POST['kategori']) : "";
@@ -24,9 +24,9 @@ if (isset($_POST['edit_menu_validate'])) {
     $query = mysqli_query($conn, $query_str); // Eksekusi query
 
     if ($query) {
-        echo "<script>alert('Menu berhasil diupdate.'); window.location.href='../menu.php';</script>";
+        echo "<script>alert('Order berhasil diupdate.'); window.location.href='../menu.php';</script>";
     } else {
-        echo "<script>alert('Gagal mengupdate Menu: " . mysqli_error($conn) . "'); window.history.back();</script>";
+        echo "<script>alert('Gagal mengupdate Order " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
 ?>
