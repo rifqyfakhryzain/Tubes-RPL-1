@@ -27,6 +27,8 @@ LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
 GROUP BY id_list_order");
 while ($record = mysqli_fetch_assoc($query)) {
     $result[] = $record;
+    $kode = $record['kode_order'];
+    $meja = $record['meja'];
 }
 
 
@@ -68,13 +70,31 @@ while ($record = mysqli_fetch_assoc($query)) {
                 <!-- Konten -->
                 <div class="relative overflow-x-auto">
 
-<div class="col-span-2">
-   <label for="kode_order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Order</label>
-   <input type="text" disabled name="kode_order" id="kode_order"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[200px] p-2.5 mb-5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-      placeholder="Kode Order"
-      >
+<div class="flex gap-4 mb-5">
+  <!-- Input Kode Order -->
+  <div class="relative w-[200px]">
+    <input type="text" disabled name="kode_order" id="kode_order"
+      class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+      placeholder=" " value="<?php echo $kode; ?>" />
+    <label for="kode_order"
+      class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
+      Kode Order
+    </label>
+  </div>
+
+  <!-- Input Nomor Meja -->
+  <div class="relative w-[200px]">
+    <input type="text" disabled name="nomor_meja" id="nomor_meja"
+      class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+      placeholder=" " value="<?php echo $meja; ?>" />
+    <label for="nomor_meja"
+      class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
+      Meja
+    </label>
+  </div>
 </div>
+
+
 
                     <div class="w-full flex justify-start sm:justify-end">
                         <!-- Button Tambah User -->
@@ -148,10 +168,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                                         <td class="px-6 py-4">
                                             <?php echo $row['harganya'] ?>
                                         </td>
-                                        <!-- Pelayan -->
-                                        <td class="px-6 py-4">
-                                            <?php echo $row['nama'] ?>
-                                        </td>
                                         <!-- Status -->
                                         <td class="px-6 py-4">
 
@@ -162,23 +178,9 @@ while ($record = mysqli_fetch_assoc($query)) {
                                             }
                                             ?>
                                         </td>
-                                        <!-- Waktu Order -->
-                                        <td class="px-6 py-4">
-                                            <?php echo $row['waktu_order'] ?>
-                                        </td>
                                         <!-- Aksi -->
                                         <td class="px-6 py-4">
                                             <div class="flex gap-2">
-                                                <!-- Button Lihat -->
-                                                <button type="button" data-modal-target="lihat-modal-<?php echo $row['id_order']; ?>" data-modal-toggle="lihat-modal-<?php echo $row['id_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">
-                                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                    </svg>
-                                                </button>
-
-
-
                                                 <!-- Button Edit -->
                                                 <button type="button" data-modal-target="edit-modal-<?php echo $row['id_order']; ?>" data-modal-toggle="edit-modal-<?php echo $row['id_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">
                                                     <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -194,15 +196,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                                                             d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                                     </svg>
                                                 </button>
-
-
-                                                <!-- Button password
-                                    <button type="button" class="flex items-center justify-center gap-2 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-gray-500 dark:hover:bg-gray-600 focus:outline-none dark:focus:ring-gray-800">
-                                       <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                          <path fill-rule="evenodd" d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z" clip-rule="evenodd" />
-                                       </svg>
-                                    </button> -->
-
                                             </div>
 
 
