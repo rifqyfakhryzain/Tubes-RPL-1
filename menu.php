@@ -5,11 +5,11 @@ if (empty($_SESSION['username_dapoer'])) {
    exit();
 }
 
-if ($_SESSION['level_dapoer'] != 1) {
-   // Jika bukan level 1, redirect ke halaman utama
-   header('location: index.php');
-   exit();
-}
+// if ($_SESSION['level_dapoer'] != 1) {
+//    // Jika bukan level 1, redirect ke halaman utama
+//    header('location: index.php');
+//    exit();
+// }
 
 include 'proses/connect.php';
 

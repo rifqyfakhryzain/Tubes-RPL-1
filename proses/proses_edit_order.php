@@ -14,11 +14,11 @@ if (isset($_POST['edit_order_validate'])) {
 
 
     // Validasi Jika ada Nomor meja yang sama
-    $cek_meja = mysqli_query($conn, "SELECT * FROM tabel_order WHERE meja = '$meja' AND id_order != '$id_order'");
-    if (mysqli_num_rows($cek_meja) > 0) {
-        echo "<script>alert('Meja sudah digunakan oleh order lain. Silakan pilih nomor meja yang berbeda.'); window.history.back();</script>";
-        exit;
-    }
+    // $cek_meja = mysqli_query($conn, "SELECT * FROM tabel_order WHERE meja = '$meja' AND id_order != '$id_order'");
+    // if (mysqli_num_rows($cek_meja) > 0) {
+    //     echo "<script>alert('Meja sudah digunakan oleh order lain. Silakan pilih nomor meja yang berbeda.'); window.history.back();</script>";
+    //     exit;
+    // }
 
     // Query SQL
     $query_str = "UPDATE tabel_order SET 

@@ -5,11 +5,11 @@ if (empty($_SESSION['username_dapoer'])) {
    exit();
 }
 
-if ($_SESSION['level_dapoer'] != 1) {
-   // Jika bukan level 1, redirect ke halaman utama
-   header('location: index.php');
-   exit();
-}
+// if ($_SESSION['level_dapoer'] != 1) {
+//    // Jika bukan level 1, redirect ke halaman utama
+//    header('location: index.php');
+//    exit();
+// }
 
 include 'proses/connect.php';
 date_default_timezone_set('Asia/Jakarta'); 
@@ -262,12 +262,12 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Kode Order -->
                   <div class="col-span-2">
                      <label for="kode_order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Order</label>
-                     <input type="text" disabled value="<?php echo date('ymdHi') . rand(1, 10) ?>" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="">
+                     <input type="text" readonly value="<?php echo date('ymdHi') . rand(1, 10) ?>" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="">
                   </div>
                   <!-- Nomor Meja -->
                   <div class="col-span-2">
-                     <label for="nomor_meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
-                     <input type="text" name="nomor_meja" id="nomor_meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor meja" required="">
+                     <label for="meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
+                     <input type="text" name="meja" id="meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor meja" required="">
                   </div>
                   <!-- Nama Pelanggan -->
                   <div class="col-span-2">
@@ -276,7 +276,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                   </div>
                </div>
                <!-- SUbmit -->
-               <button type="submit" name="input_menu_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+               <button type="submit" name="input_order_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                   </svg>

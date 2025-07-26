@@ -13,6 +13,7 @@ if (!empty($_POST['submit_validasi'])) {
     if ($hasil && password_verify($password, $hasil['password'])) {
         $_SESSION['username_dapoer'] = $username;
         $_SESSION['level_dapoer'] = $hasil['level'];
+        $_SESSION['id'] = $hasil['id'];
         header('Location: ../index.php');
         exit;
     } else {
