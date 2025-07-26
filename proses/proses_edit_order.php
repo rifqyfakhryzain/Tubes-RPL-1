@@ -1,30 +1,28 @@
 <?php
 include "connect.php";
 
-$ = isset($_POST['id']) ? htmlentities($_POST['id']) : "";
-$nama_menu = isset($_POST['nama_menu']) ? htmlentities($_POST['nama_menu']) : "";
-$keterangan = isset($_POST['keterangan']) ? htmlentities($_POST['keterangan']) : "";
-$kategori = isset($_POST['kategori']) ? htmlentities($_POST['kategori']) : "";
-$harga = isset($_POST['harga']) ? htmlentities($_POST['harga']) : "";
+$id_order   = isset($_POST['id_order']) ? htmlentities($_POST['id_order']) : "";
+$kode_order = isset($_POST['kode_order']) ? htmlentities($_POST['kode_order']) : "";
+$meja       = isset($_POST['meja']) ? htmlentities($_POST['meja']) : "";
+$pelanggan  = isset($_POST['pelanggan']) ? htmlentities($_POST['pelanggan']) : "";
 
-if (isset($_POST['edit_menu_validate'])) {
-    if ($id == "") {
+if (isset($_POST['edit_order_validate'])) {
+    if ($id_order == "") {
         echo "<script>alert('ID tidak ditemukan.'); window.history.back();</script>";
         exit;
     }
 
     // Query SQL
-    $query_str = "UPDATE tabel_daftar_menu SET 
-                    nama_menu='$nama_menu', 
-                    keterangan='$keterangan', 
-                    harga='$harga', 
-                    kategori='$kategori'
-                  WHERE id='$id'";  
+    $query_str = "UPDATE tabel_order SET 
+                    kode_order='$kode_order', 
+                    meja='$meja', 
+                    pelanggan='$pelanggan' 
+                  WHERE id_order='$id_order'";
 
-    $query = mysqli_query($conn, $query_str); // Eksekusi query
+    $query = mysqli_query($conn, $query_str);
 
     if ($query) {
-        echo "<script>alert('Order berhasil diupdate.'); window.location.href='../menu.php';</script>";
+        echo "<script>alert('Order berhasil diupdate.'); window.location.href='../order.php';</script>";
     } else {
         echo "<script>alert('Gagal mengupdate Order " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
