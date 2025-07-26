@@ -208,6 +208,7 @@ if ($id_order > 0) {
 
                                     </tr>
                                 <?php
+                                $total += $row['harganya'];
                                 } ?>
                                 <!-- Total Harga -->
                                 <td class="px-6 py-4" colspan="3">
@@ -215,7 +216,7 @@ if ($id_order > 0) {
                                 </td>
                                 <!-- Total Harga -->
                                 <td class="px-6 py-4">
-                                   <b> <?php echo $row['harganya'] ?> </b>
+                                   <b> <?php echo number_format($total,0,',', '.') ?> </b>
                                 </td>
                             </tbody>
                         </table>
