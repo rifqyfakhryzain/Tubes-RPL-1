@@ -256,31 +256,22 @@ while ($record = mysqli_fetch_assoc($query)) {
                </button>
             </div>
             <!-- Modal body dan Form -->
-            <form action="proses/proses_input_menu.php" method="POST" class="p-4 md:p-5">
+            <form action="proses/proses_input_order.php" method="POST" class="p-4 md:p-5">
                <div class="grid gap-4 mb-4 grid-cols-2">
-                  <!-- Nama Menu-->
+                  <!-- Kode Order -->
                   <div class="col-span-2">
-                     <label for="nama_menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Menu</label>
-                     <input type="text" name="nama_menu" id="nama_menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Menu" required="">
+                     <label for="kode_order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Order</label>
+                     <input type="text" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="">
                   </div>
-                  <!-- Keterangan -->
+                  <!-- Nomor Meja -->
                   <div class="col-span-2">
-                     <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
-                     <input type="text" name="keterangan" id="keterangan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="keterangan" required="">
+                     <label for="nomor_meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
+                     <input type="text" name="nomor_meja" id="nomor_meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor meja" required="">
                   </div>
-                  <!-- Harga -->
-                  <div class="col-span-2 sm:col-span-1">
-                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                     <input type="name" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Harga" required="">
-                  </div>
-                  <!-- Level -->
-                  <div class="col-span-2 sm:col-span-1">
-                     <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                     <select name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option value="" disabled selected hidden>Pilih Kategori Menu</option>
-                        <option value="1">Makanan</option>
-                        <option value="2">Minuman</option>
-                     </select>
+                  <!-- Nama Pelanggan -->
+                  <div class="col-span-2">
+                     <label for="pelanggan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pelanggan</label>
+                     <input type="text" name="pelanggan" id="pelanggan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Pelanggan" required="">
                   </div>
                </div>
                <!-- SUbmit -->
