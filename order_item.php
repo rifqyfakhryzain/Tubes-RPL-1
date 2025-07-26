@@ -172,7 +172,7 @@ if ($id_order > 0) {
                                         </td>
                                         <!-- Harga -->
                                         <td class="px-6 py-4">
-                                            <?php echo $row['harga'] ?>
+                                           <?php echo number_format($row['harga'],0,',', '.') ?> 
                                         </td>
                                         <!-- Jumlah Pesanan -->
                                         <td class="px-6 py-4">
@@ -180,7 +180,7 @@ if ($id_order > 0) {
                                         </td>
                                         <!-- Total Harga -->
                                         <td class="px-6 py-4">
-                                            <?php echo $row['harganya'] ?>
+                                           <?php echo number_format($row['harganya'],0,',', '.') ?> 
                                         </td>
                                         <!-- Aksi -->
                                         <td class="px-6 py-4">
