@@ -35,13 +35,12 @@ if ($id_order > 0) {
     ");
 
 
-while ($record = mysqli_fetch_assoc($query)) {
-    $result[] = $record;
-    $kode = $record['kode_order'];
-    $meja = $record['meja'];
-    $pelanggan = $record['pelanggan'];
-}
-
+    while ($record = mysqli_fetch_assoc($query)) {
+        $result[] = $record;
+        $kode = $record['kode_order'];
+        $meja = $record['meja'];
+        $pelanggan = $record['pelanggan'];
+    }
 }
 ?>
 
@@ -81,39 +80,39 @@ while ($record = mysqli_fetch_assoc($query)) {
                 <!-- Konten -->
                 <div class="relative overflow-x-auto">
 
-<div class="flex gap-4 mb-5">
-  <!-- Input Kode Order -->
-  <div class="relative w-[200px]">
-    <input type="text" disabled name="kode_order" id="kode_order"
-      class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-      placeholder=" " value="<?php echo $kode; ?>" />
-    <label for="kode_order"
-      class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
-      Kode Order
-    </label>
-  </div>
+                    <div class="flex gap-4 mb-5">
+                        <!-- Input Kode Order -->
+                        <div class="relative w-[200px]">
+                            <input type="text" disabled name="kode_order" id="kode_order"
+                                class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                placeholder=" " value="<?php echo $kode; ?>" />
+                            <label for="kode_order"
+                                class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
+                                Kode Order
+                            </label>
+                        </div>
 
-  <!-- Input Nomor Meja -->
-  <div class="relative w-[200px]">
-    <input type="text" disabled name="nomor_meja" id="nomor_meja"
-      class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-      placeholder=" " value="<?php echo $meja; ?>" />
-    <label for="nomor_meja"
-      class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
-      Meja
-    </label>
-  </div>
-  <!-- Input Nama Pelanggan -->
-  <div class="relative w-[200px]">
-    <input type="text" disabled name="nomor_meja" id="nomor_meja"
-      class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-      placeholder=" " value="<?php echo $pelanggan; ?>" />
-    <label for="nomor_meja"
-      class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
-      Pelanggan
-    </label>
-  </div>
-</div>
+                        <!-- Input Nomor Meja -->
+                        <div class="relative w-[200px]">
+                            <input type="text" disabled name="nomor_meja" id="nomor_meja"
+                                class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                placeholder=" " value="<?php echo $meja; ?>" />
+                            <label for="nomor_meja"
+                                class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
+                                Meja
+                            </label>
+                        </div>
+                        <!-- Input Nama Pelanggan -->
+                        <div class="relative w-[200px]">
+                            <input type="text" disabled name="nomor_meja" id="nomor_meja"
+                                class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                placeholder=" " value="<?php echo $pelanggan; ?>" />
+                            <label for="nomor_meja"
+                                class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
+                                Pelanggan
+                            </label>
+                        </div>
+                    </div>
 
 
 
@@ -136,24 +135,23 @@ while ($record = mysqli_fetch_assoc($query)) {
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
+                                    <!-- Menu -->
                                     <th scope="col" class="px-6 py-3">
                                         Menu
                                     </th>
+                                    <!-- Harga -->
                                     <th scope="col" class="px-6 py-3">
                                         Harga
                                     </th>
+                                    <!-- Jumlah Pesanan -->
                                     <th scope="col" class="px-6 py-3">
-                                        Qty
+                                        Jumlah Pesanan
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Catatan
-                                    </th>
+                                    <!-- Total -->
                                     <th scope="col" class="px-6 py-3">
                                         Total
                                     </th>
+                                    <!-- Aksi -->
                                     <th scope="col" class="px-6 py-3">
                                         Aksi
                                     </th>
@@ -162,7 +160,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                             <tbody>
 
                                 <?php
-                                $no = 1;
+                                $total = 0;
                                 foreach ($result as $row) {
                                 ?>
 
@@ -179,15 +177,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                                         <!-- Jumlah Pesanan -->
                                         <td class="px-6 py-4">
                                             <?php echo $row['jumlah'] ?>
-                                        </td>
-                                        <!-- Status -->
-                                        <td class="px-6 py-4">
-                                            <?php echo $row['status'] ?>
-
-                                        </td>
-                                        <!-- Catatan -->
-                                        <td class="px-6 py-4">
-                                            <?php echo $row['harganya'] ?>
                                         </td>
                                         <!-- Total Harga -->
                                         <td class="px-6 py-4">
@@ -220,6 +209,14 @@ while ($record = mysqli_fetch_assoc($query)) {
                                     </tr>
                                 <?php
                                 } ?>
+                                <!-- Total Harga -->
+                                <td class="px-6 py-4" colspan="3">
+                                    <b>Total Harga</b>
+                                </td>
+                                <!-- Total Harga -->
+                                <td class="px-6 py-4">
+                                   <b> <?php echo $row['harganya'] ?> </b>
+                                </td>
                             </tbody>
                         </table>
                     <?php
