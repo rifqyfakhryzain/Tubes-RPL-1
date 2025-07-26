@@ -19,12 +19,22 @@ $username = $_SESSION['username_dapoer'];
 $query_user = mysqli_query($conn, "SELECT * FROM tabel_user WHERE username = '$username'");
 $hasil = mysqli_fetch_assoc($query_user);
 
+// Ambil ID order dari GET parameter
+$id_order = isset($_GET['id_order']) ? intval($_GET['id_order']) : 0;
+
 // Data untuk tabel semua user
 $result = [];
-$query = mysqli_query($conn, "SELECT *, SUM(harga*jumlah) AS harganya FROM tabel_order
-LEFT JOIN tabel_list_order ON tabel_list_order.order = tabel_order.id_order
-LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
-GROUP BY id_list_order");
+if ($id_order > 0) {
+    $query = mysqli_query($conn, "
+        SELECT *, SUM(harga * jumlah) AS harganya 
+        FROM tabel_order
+        LEFT JOIN tabel_list_order ON tabel_list_order.order = tabel_order.id_order
+        LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
+        WHERE tabel_order.id_order = $id_order
+        GROUP BY id_list_order
+    ");
+
+
 while ($record = mysqli_fetch_assoc($query)) {
     $result[] = $record;
     $kode = $record['kode_order'];
@@ -32,7 +42,7 @@ while ($record = mysqli_fetch_assoc($query)) {
     $pelanggan = $record['pelanggan'];
 }
 
-
+}
 ?>
 
 
@@ -158,36 +168,30 @@ while ($record = mysqli_fetch_assoc($query)) {
 
 
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                        <!-- Nomer -->
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <?= $no++; ?>
-                                        </th>
-                                        <!-- Kode Order -->
+                                        <!-- Nama Menu -->
                                         <td class="px-6 py-4">
-                                            <?php echo $row['kode_order'] ?>
+                                            <?php echo $row['nama_menu'] ?>
                                         </td>
-                                        <!-- Pelanggan -->
+                                        <!-- Harga -->
                                         <td class="px-6 py-4">
-                                            <?php echo $row['pelanggan'] ?>
+                                            <?php echo $row['harga'] ?>
                                         </td>
-                                        <!-- Meja -->
+                                        <!-- Jumlah Pesanan -->
                                         <td class="px-6 py-4">
-                                            <?php echo $row['meja'] ?>
+                                            <?php echo $row['jumlah'] ?>
+                                        </td>
+                                        <!-- Status -->
+                                        <td class="px-6 py-4">
+                                            <?php echo $row['status'] ?>
 
+                                        </td>
+                                        <!-- Catatan -->
+                                        <td class="px-6 py-4">
+                                            <?php echo $row['harganya'] ?>
                                         </td>
                                         <!-- Total Harga -->
                                         <td class="px-6 py-4">
                                             <?php echo $row['harganya'] ?>
-                                        </td>
-                                        <!-- Status -->
-                                        <td class="px-6 py-4">
-
-                                            <?php if ($row['status'] == 1) {
-                                                echo 'Masuk Dapur';
-                                            } elseif ($row['status'] == 2) {
-                                                echo 'Makanan tersedia';
-                                            }
-                                            ?>
                                         </td>
                                         <!-- Aksi -->
                                         <td class="px-6 py-4">
