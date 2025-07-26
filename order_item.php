@@ -29,6 +29,7 @@ while ($record = mysqli_fetch_assoc($query)) {
     $result[] = $record;
     $kode = $record['kode_order'];
     $meja = $record['meja'];
+    $pelanggan = $record['pelanggan'];
 }
 
 
@@ -90,6 +91,16 @@ while ($record = mysqli_fetch_assoc($query)) {
     <label for="nomor_meja"
       class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
       Meja
+    </label>
+  </div>
+  <!-- Input Nama Pelanggan -->
+  <div class="relative w-[200px]">
+    <input type="text" disabled name="nomor_meja" id="nomor_meja"
+      class="peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-2.5 pt-8 pb-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+      placeholder=" " value="<?php echo $pelanggan; ?>" />
+    <label for="nomor_meja"
+      class="absolute left-2.5 top-2 z-10 origin-[0] scale-75 transform text-xl text-gray-500 duration-300 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 dark:peer-focus:text-blue-500">
+      Pelanggan
     </label>
   </div>
 </div>
