@@ -12,6 +12,7 @@ if ($_SESSION['level_dapoer'] != 1) {
 }
 
 include 'proses/connect.php';
+date_default_timezone_set('Asia/Jakarta'); 
 
 $username = $_SESSION['username_dapoer'];
 
@@ -175,7 +176,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                                              <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
                                              <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                           </svg>
-                                          
+
                                        </button>
                                     </a>
 
@@ -261,7 +262,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Kode Order -->
                   <div class="col-span-2">
                      <label for="kode_order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Order</label>
-                     <input type="text" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="">
+                     <input type="text" disabled value="<?php echo date('ymdHi') . rand(1, 10) ?>" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="">
                   </div>
                   <!-- Nomor Meja -->
                   <div class="col-span-2">
@@ -328,20 +329,20 @@ while ($record = mysqli_fetch_assoc($query)) {
                         <input type="text" name="pelanggan" id="pelanggan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Pelanggan" required="" value="<?php echo $row['pelanggan'] ?>">
                      </div>
 
-                     </div>
-
-                     <!-- SUbmit -->
-                     <button type="submit" name="edit_order_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                        </svg>
-                        Edit Order
-                     </button>
                   </div>
 
-               </form>
+                  <!-- SUbmit -->
+                  <button type="submit" name="edit_order_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                     </svg>
+                     Edit Order
+                  </button>
             </div>
+
+            </form>
          </div>
+      </div>
       </div>
    <?php } ?>
 
