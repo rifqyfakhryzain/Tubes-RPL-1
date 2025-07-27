@@ -87,7 +87,7 @@ if ($id_order > 0) {
                         </a>
                     </div>
 
-                    <div class="flex gap-4 mb-5">
+                    <div class="flex flex-col md:flex-row gap-4 mb-5">
                         <!-- Input Kode Order -->
                         <div class="relative w-[200px]">
                             <input type="text" disabled name="kode_order" id="kode_order"
