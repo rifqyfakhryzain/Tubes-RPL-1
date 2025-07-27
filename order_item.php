@@ -74,6 +74,18 @@ if ($id_order > 0) {
 
                 <!-- Konten -->
                 <div class="relative overflow-x-auto">
+                    <div class="flex gap-4 mb-5">
+                        <!-- Button Lihat -->
+                        <a href="order.php">
+                            <button type="button"
+                                class="flex items-center justify-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4" />
+                                </svg>
+
+                            </button>
+                        </a>
+                    </div>
 
                     <div class="flex gap-4 mb-5">
                         <!-- Input Kode Order -->
@@ -167,7 +179,7 @@ if ($id_order > 0) {
                                         </td>
                                         <!-- Harga -->
                                         <td class="px-6 py-4">
-                                           <?php echo number_format($row['harga'],0,',', '.') ?> 
+                                            <?php echo number_format($row['harga'], 0, ',', '.') ?>
                                         </td>
                                         <!-- Jumlah Pesanan -->
                                         <td class="px-6 py-4">
@@ -175,7 +187,7 @@ if ($id_order > 0) {
                                         </td>
                                         <!-- Total Harga -->
                                         <td class="px-6 py-4">
-                                           <?php echo number_format($row['harganya'],0,',', '.') ?> 
+                                            <?php echo number_format($row['harganya'], 0, ',', '.') ?>
                                         </td>
                                         <!-- Aksi -->
                                         <td class="px-6 py-4">
@@ -203,7 +215,7 @@ if ($id_order > 0) {
 
                                     </tr>
                                 <?php
-                                $total += $row['harganya'];
+                                    $total += $row['harganya'];
                                 } ?>
                                 <!-- Total Harga -->
                                 <td class="px-6 py-4" colspan="3">
@@ -211,7 +223,7 @@ if ($id_order > 0) {
                                 </td>
                                 <!-- Total Harga -->
                                 <td class="px-6 py-4 font-bold">
-                                    <?php echo number_format($total,0,',', '.') ?>
+                                    <?php echo number_format($total, 0, ',', '.') ?>
                                 </td>
                             </tbody>
                         </table>
