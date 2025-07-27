@@ -370,7 +370,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <h3 class="mb-1 text-lg font-normal text-gray-500 dark:text-gray-400">
                         Apakah anda yakin menghapus order
                      </h3>
-                     </svg>
                      <h3 class="mb-1 text-xl font-normal text-gray-500 dark:text-gray-400">  
                         <span class="font-bold text-black dark:text-white">Kode Order :  <?php echo $row['kode_order']; ?></span>
                      </h3>
