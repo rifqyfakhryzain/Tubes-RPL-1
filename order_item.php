@@ -5,7 +5,6 @@ if (empty($_SESSION['username_dapoer'])) {
     exit();
 }
 
-
 include 'proses/connect.php';
 
 $username = $_SESSION['username_dapoer'];
@@ -24,26 +23,32 @@ while ($row = mysqli_fetch_assoc($query_menu)) {
     $menu_result[] = $row;
 }
 
-
-
-// Data untuk tabel semua user
 $result = [];
+$kode = '';
+$meja = '';
+$pelanggan = '';
+
 if ($id_order > 0) {
+    // Ambil informasi order (kode_order, meja, pelanggan)
+    $q_info = mysqli_query($conn, "SELECT kode_order, meja, pelanggan FROM tabel_order WHERE id_order = $id_order");
+    if ($info = mysqli_fetch_assoc($q_info)) {
+        $kode = $info['kode_order'];
+        $meja = $info['meja'];
+        $pelanggan = $info['pelanggan'];
+    }
+
+    // Ambil detail list order + menu
     $query = mysqli_query($conn, "
         SELECT *, SUM(harga * jumlah) AS harganya 
         FROM tabel_order
-        LEFT JOIN tabel_list_order ON tabel_list_order.order = tabel_order.id_order
+        LEFT JOIN tabel_list_order ON tabel_list_order.kode_order = tabel_order.id_order
         LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
         WHERE tabel_order.id_order = $id_order
         GROUP BY id_list_order
     ");
 
-
     while ($record = mysqli_fetch_assoc($query)) {
         $result[] = $record;
-        $kode = $record['kode_order'];
-        $meja = $record['meja'];
-        $pelanggan = $record['pelanggan'];
     }
 }
 ?>
@@ -287,14 +292,14 @@ if ($id_order > 0) {
                         </button>
                     </div>
                     <!-- Modal body dan Form -->
-                    <form action="proses/proses_order_item.php" method="POST" class="p-4 md:p-5">
-                        <input type="hidden" name="kode_order" value="<?php echo $kode ?>">
+                    <form action="proses/proses_input_order_item.php" method="POST" class="p-4 md:p-5">
+                        <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
                         <input type="hidden" name="meja" value="<?php echo $meja ?>">
                         <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <!-- Nama Menu-->
                             <div class="col-span-2">
-                                <select name="kategori" id="kategori" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <select name="menu" id="menu" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option value="" disabled selected hidden>Pilih Menu</option>
                                     <?php foreach ($menu_result as $row): ?>
                                         <option value="<?= $row['id'] ?>"><?= $row['nama_menu'] ?></option>
@@ -304,8 +309,8 @@ if ($id_order > 0) {
                             </div>
                             <!-- Jumlah Porsi -->
                             <div class="col-span-2">
-                                <label for="jumlah_porsi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
-                                <input type="text" name="jumlah_porsi" id="jumlah_porsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="">
+                                <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
+                                <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="">
                             </div>
                             <!-- catatan -->
                             <div class="col-span-2">
