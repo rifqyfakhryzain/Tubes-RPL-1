@@ -238,7 +238,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
    </main>
 
-   <!-- Modal Tambah USer -->
+   <!-- Modal Tambah Order -->
    <!-- Main modal -->
    <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative p-4 w-full max-w-md max-h-full">
@@ -290,7 +290,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
    <?php
    foreach ($result as $row) { ?>
-      <!-- Modal Edit USer -->
+      <!-- Modal Edit Order -->
       <!-- Main modal -->
       <div id="edit-modal-<?php echo $row['id_order']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
          <div class="relative p-4 w-full max-w-md max-h-full">
