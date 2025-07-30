@@ -307,9 +307,9 @@ if ($id_order > 0) {
                                 <label for="jumlah_porsi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
                                 <input type="text" name="jumlah_porsi" id="jumlah_porsi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="">
                             </div>
-                            <!-- Harga -->
+                            <!-- catatan -->
                             <div class="col-span-2">
-                                <label for="Catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
+                                <label for="catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
                                 <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="">
                             </div>
                         </div>
