@@ -21,13 +21,13 @@
                 </a>
             </li>
             <li>
-                <a href="kategori.php" class=" <?= basename($_SERVER['PHP_SELF']) == 'kategori.php' ? 'bg-gray-700' : '' ?> flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="reservasi.php" class=" <?= basename($_SERVER['PHP_SELF']) == 'reservasi.php' ? 'bg-gray-700' : '' ?> flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
                     </svg>
 
 
-                    <span class="flex-1 ms-3 whitespace-nowrap">Kategori Menu</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Reservasi Meja</span>
                 </a>
             </li>
 
