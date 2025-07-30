@@ -16,7 +16,7 @@ $id_pelayan = $_SESSION['id']; // pastikan id sudah disimpan saat login
 
 $message = "";
 
-if (isset($_POST['input_order_validate'])) {
+if (isset($_POST['input_order_item_validate'])) {
 
     // Cek apakah kode_order sudah dipakai
     $cek = mysqli_query($conn, "SELECT * FROM tabel_order WHERE id_order = '$kode_order'");
