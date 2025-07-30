@@ -154,6 +154,10 @@ if ($id_order > 0) {
                                     <th scope="col" class="px-6 py-3">
                                         Jumlah Pesanan
                                     </th>
+                                    <!-- Catatan -->
+                                    <th scope="col" class="px-6 py-3">
+                                        Catatan
+                                    </th>
                                     <!-- Total -->
                                     <th scope="col" class="px-6 py-3">
                                         Total
@@ -184,6 +188,10 @@ if ($id_order > 0) {
                                         <!-- Jumlah Pesanan -->
                                         <td class="px-6 py-4">
                                             <?php echo $row['jumlah'] ?>
+                                        </td>
+                                        <!-- Catatan -->
+                                        <td class="px-6 py-4">
+                                            <?php echo $row['catatan'] ?>
                                         </td>
                                         <!-- Total Harga -->
                                         <td class="px-6 py-4">
@@ -218,7 +226,7 @@ if ($id_order > 0) {
                                     $total += $row['harganya'];
                                 } ?>
                                 <!-- Total Harga -->
-                                <td class="px-6 py-4" colspan="3">
+                                <td class="px-6 py-4" colspan="4">
                                     <b>Total Harga</b>
                                 </td>
                                 <!-- Total Harga -->
