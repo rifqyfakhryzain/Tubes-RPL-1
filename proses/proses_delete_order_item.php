@@ -1,20 +1,31 @@
 <?php
 include "connect.php";
 
-$id_order = isset($_POST['id_order']) ? htmlentities($_POST['id_order']) : "";
+$id = isset($_POST['id']) ? htmlentities($_POST['id']) : "";
+$kode_order = isset($_POST['kode_order']) ? htmlentities($_POST['kode_order']) : "";
 
-if (isset($_POST['delete_order_validate'])) {
-    if ($id_order == "") {
+
+if (isset($_POST['delete_order_item_validate'])) {
+    if ($id == "") {
         echo "<script>alert('ID tidak ditemukan.'); window.history.back();</script>";
         exit;
     }
 
-    $query = mysqli_query($conn, "DELETE FROM tabel_order WHERE id_order = '$id_order'");
+    $message = "";
 
-    if ($query) {
-        echo "<script>alert('Order berhasil dihapus.'); window.location.href='../order.php';</script>";
-    } else {
-        echo "<script>alert('Gagal Menghapus Order " . mysqli_error($conn) . "'); window.history.back();</script>";
-    }
+    $query = mysqli_query($conn, "DELETE FROM tabel_list_order WHERE id_list_order = '$id'");
+
+        if ($query) {
+            $message = '<script>
+                alert("Item berhasil dihapus.");
+                window.location.href = "../order_item.php?id_order=' . $kode_order . '";
+            </script>';
+        } else {
+            $message = '<script>
+                alert("gagal mengahpus item : ' . mysqli_error($conn) . '");
+                window.history.back();
+            </script>';
+        }
 }
+echo $message;
 ?>
