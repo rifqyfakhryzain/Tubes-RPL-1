@@ -366,7 +366,7 @@ if ($id_order > 0) {
 
 
                     <!-- Modal Body  Form -->
-                    <form action="proses/proses_input_order_item.php" method="POST" class="p-4 md:p-5">
+                    <form action="proses/proses_bayar.php" method="POST" class="p-4 md:p-5">
                         <!-- Hidden input -->
                         <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
                         <input type="hidden" name="meja" value="<?php echo $meja ?>">
@@ -408,17 +408,17 @@ if ($id_order > 0) {
 
                         <!-- Input Nominal Uang -->
                         <div class="mt-4">
-                            <label for="jumlah" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white"> Nominal Uang</label>
+                            <label for="bayar" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white"> Nominal Uang</label>
                             <div class="flex items-center">
                                 <span class="text-3xl font-bold mr-2 dark:text-white">Rp.</span>
-                                <input type="text" name="jumlah" id="jumlah" placeholder="Nominal Uang"
+                                <input type="text" name="bayar"  id="bayar" required placeholder="Nominal Uang"
                                     class="w-full md:w-[200px] p-2.5 text-2xl text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                             </div>
                         </div>
 
                         <!-- Tombol Submit -->
                         <div class="mt-6 flex justify-end">
-                            <button type="submit" name="input_order_item_validate"
+                            <button type="submit" name="input_bayar_validate"
                                 class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 11 0 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 11 0-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
