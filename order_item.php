@@ -43,6 +43,7 @@ if ($id_order > 0) {
         FROM tabel_order
         LEFT JOIN tabel_list_order ON tabel_list_order.kode_order = tabel_order.id_order
         LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
+        LEFT JOIN tabel_bayar ON tabel_bayar.id_bayar = tabel_order.id_order
         WHERE tabel_order.id_order = $id_order
         GROUP BY id_list_order
     ");
@@ -205,21 +206,45 @@ if ($id_order > 0) {
                                         <!-- Aksi -->
                                         <td class="px-6 py-4">
                                             <div class="flex gap-2">
-                                                <!-- Button Edit -->
-                                                <button type="button" data-modal-target="edit-modal-<?php echo $row['id_list_order']; ?>" data-modal-toggle="edit-modal-<?php echo $row['id_list_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">
-                                                    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-                                                    </svg>
-                                                </button>
+<?php $dibayar = !empty($row['id_bayar']); ?>
+
+<!-- Button Edit -->
+<button type="button"
+    data-modal-target="edit-modal-<?php echo $row['id_list_order']; ?>"
+    data-modal-toggle="edit-modal-<?php echo $row['id_list_order']; ?>"
+    <?php if ($dibayar) echo 'disabled'; ?>
+    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+        <?php echo $dibayar
+            ? 'text-white bg-gray-400 cursor-not-allowed'
+            : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
+        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
+    </svg>
+</button>
+
 
                                                 <!-- Button Delete -->
-                                                <button type="button" data-modal-target="popup-modal-<?= $row['id_list_order']; ?>" data-modal-toggle="popup-modal-<?= $row['id_list_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                                    </svg>
-                                                </button>
+<?php $dibayar = !empty($row['id_bayar']); ?>
+
+<!-- Tombol Delete -->
+<button type="button"
+    data-modal-target="popup-modal-<?= $row['id_list_order']; ?>"
+    data-modal-toggle="popup-modal-<?= $row['id_list_order']; ?>"
+    <?php if ($dibayar) echo 'disabled'; ?>
+    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+        <?php echo $dibayar
+            ? 'text-white bg-gray-400 cursor-not-allowed'
+            : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
+        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+    </svg>
+</button>
                                             </div>
 
 
@@ -242,21 +267,39 @@ if ($id_order > 0) {
                         </table>
                         <div class="w-full flex justify-start sm:justify-end">
                             <!-- Button Tambah Item -->
-                            <button type="button" data-modal-target="item-modal" data-modal-toggle="item-modal"
-                                class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-4 py-2 mb-5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                                <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
-                                </svg>
-                                Item
-                            </button>
-                            <!-- Button Bayar Item -->
-                            <button type="button" data-modal-target="bayar-modal" data-modal-toggle="bayar-modal"
-                                class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-4 py-2 mb-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                                <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
-                                </svg>
-                                Bayar
-                            </button>
+<?php
+$dibayar = !empty($row['id_bayar']); // true jika sudah dibayar
+?>
+
+<button type="button"
+    data-modal-target="item-modal"
+    data-modal-toggle="item-modal"
+    <?php if ($dibayar) echo 'disabled'; ?>
+    class="flex items-center text-white font-medium rounded-lg text-base px-4 py-2 mb-5 mr-2 whitespace-nowrap
+        <?php echo $dibayar
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'; ?>
+        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 12h14m-7 7V5" />
+    </svg>
+    <span class="ml-2">Item</span>
+</button>
+<!-- Button Bayar Item -->
+<?php $sudah_bayar = !empty($row['id_bayar']); ?>
+<button 
+    type="button" 
+    data-modal-target="bayar-modal" 
+    data-modal-toggle="bayar-modal"
+    class="flex items-center text-white <?php echo $sudah_bayar ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300'; ?> font-medium rounded-lg text-base px-4 py-2 mb-5 dark:<?php echo $sudah_bayar ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-800'; ?> focus:outline-none whitespace-nowrap"
+    <?php echo $sudah_bayar ? 'disabled' : ''; ?>>
+    <svg class="w-5 h-5 text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
+    </svg>
+    Bayar
+</button>
 
 
                         </div>

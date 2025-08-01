@@ -12,7 +12,7 @@ if (empty($_SESSION['username_dapoer'])) {
 // }
 
 include 'proses/connect.php';
-date_default_timezone_set('Asia/Jakarta'); 
+date_default_timezone_set('Asia/Jakarta');
 
 $username = $_SESSION['username_dapoer'];
 
@@ -22,11 +22,13 @@ $hasil = mysqli_fetch_assoc($query_user);
 
 // Data untuk tabel semua user
 $result = [];
-$query = mysqli_query($conn, "SELECT tabel_order.*,nama, SUM(harga*jumlah) AS harganya FROM tabel_order
+$query = mysqli_query($conn, "SELECT tabel_order.*,tabel_bayar.*,nama, SUM(harga*jumlah) AS harganya FROM tabel_order
 LEFT JOIN tabel_user ON tabel_user.id = tabel_order.pelayan
 LEFT JOIN tabel_list_order ON tabel_list_order.kode_order = tabel_order.id_order
 LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
-GROUP BY id_order");
+LEFT JOIN tabel_bayar ON tabel_bayar.id_bayar = tabel_order.id_order
+
+GROUP BY id_order ORDER BY waktu_order DESC");
 while ($record = mysqli_fetch_assoc($query)) {
    $result[] = $record;
 }
@@ -151,16 +153,19 @@ while ($record = mysqli_fetch_assoc($query)) {
                               <td class="px-6 py-4">
                                  <?php echo $row['nama'] ?>
                               </td>
-                              <!-- Status -->
-                              <td class="px-6 py-4">
+<!-- Status -->
+<td class="px-6 py-4">
+    <?php if (!empty($row['id_bayar'])): ?>
+        <span class="inline-flex items-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
+          Sudah Dibayar
+        </span>
+    <?php else: ?>
+        <span class="inline-flex items-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
+            Belum Dibayar
+        </span>
+    <?php endif; ?>
+</td>
 
-                                 <?php if ($row['status'] == 1) {
-                                    echo 'Masuk Dapur';
-                                 } elseif ($row['status'] == 2) {
-                                    echo 'Makanan tersedia';
-                                 }
-                                 ?>
-                              </td>
                               <!-- Waktu Order -->
                               <td class="px-6 py-4">
                                  <?php echo $row['waktu_order'] ?>
@@ -182,22 +187,43 @@ while ($record = mysqli_fetch_assoc($query)) {
 
 
 
+<?php $dibayar = !empty($row['id_bayar']); ?>
 
-                                    <!-- Button Edit -->
-                                    <button type="button" data-modal-target="edit-modal-<?php echo $row['id_order']; ?>" data-modal-toggle="edit-modal-<?php echo $row['id_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">
-                                       <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-                                       </svg>
-                                    </button>
+<!-- Tombol Edit -->
+<button type="button"
+    data-modal-target="edit-modal-<?php echo $row['id_order']; ?>"
+    data-modal-toggle="edit-modal-<?php echo $row['id_order']; ?>"
+    <?php if ($dibayar) echo 'disabled'; ?>
+    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+        <?php echo $dibayar
+            ? 'text-white bg-gray-400 cursor-not-allowed'
+            : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
+        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
+    </svg>
+</button>
 
-                                    <!-- Button Delete -->
-                                    <button type="button" data-modal-target="popup-modal-<?= $row['id_order']; ?>" data-modal-toggle="popup-modal-<?= $row['id_order']; ?>" class="flex items-center justify-center gap-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                       <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                          viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                             d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                       </svg>
-                                    </button>
+<?php $dibayar = !empty($row['id_bayar']); ?>
+
+<!-- Button Delete -->
+<button type="button"
+    data-modal-target="popup-modal-<?= $row['id_order']; ?>"
+    data-modal-toggle="popup-modal-<?= $row['id_order']; ?>"
+    <?php if ($dibayar) echo 'disabled'; ?>
+    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+        <?php echo $dibayar
+            ? 'text-white bg-gray-400 cursor-not-allowed'
+            : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
+        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+    </svg>
+</button>
 
 
                                     <!-- Button password
@@ -370,11 +396,11 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <h3 class="mb-1 text-lg font-normal text-gray-500 dark:text-gray-400">
                         Apakah anda yakin menghapus order
                      </h3>
-                     <h3 class="mb-1 text-xl font-normal text-gray-500 dark:text-gray-400">  
-                        <span class="font-bold text-black dark:text-white">Kode Order :  <?php echo $row['kode_order']; ?></span>
+                     <h3 class="mb-1 text-xl font-normal text-gray-500 dark:text-gray-400">
+                        <span class="font-bold text-black dark:text-white">Kode Order : <?php echo $row['kode_order']; ?></span>
                      </h3>
-                     <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">  
-                        <span class="font-bold text-black dark:text-white">Nama Pelanggan :  <?php echo $row['pelanggan']; ?></span>
+                     <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">
+                        <span class="font-bold text-black dark:text-white">Nama Pelanggan : <?php echo $row['pelanggan']; ?></span>
                      </h3>
                      <button data-modal-hide="popup-modal-<?= $row['id_order']; ?>" name="delete_order_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                         Hapus
