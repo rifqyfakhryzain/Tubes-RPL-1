@@ -258,9 +258,9 @@ if ($id_order > 0) {
                                 Bayar
                             </button>
 
-                        
+
                         </div>
-                        
+
                     <?php
                     }
                     ?>
@@ -339,10 +339,10 @@ if ($id_order > 0) {
                 </div>
             </div>
         </div>
-                                    </div>
+        </div>
     <?php } ?>
 
-        <!-- Modal Bayar Item -->
+    <!-- Modal Bayar Item -->
     <!-- Main modal -->
     <?php
     foreach ($result as $row) { ?>
@@ -364,70 +364,72 @@ if ($id_order > 0) {
                     </div>
 
 
-    <!-- Table wrapper -->
-  <!-- Modal Body + Form -->
-            <form action="proses/proses_input_order_item.php" method="POST" class="p-4 md:p-5">
-                <!-- Hidden input -->
-                <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
-                <input type="hidden" name="meja" value="<?php echo $meja ?>">
-                <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
+                    <!-- Table wrapper -->
+                    <!-- Modal Body + Form -->
+                    <form action="proses/proses_input_order_item.php" method="POST" class="p-4 md:p-5">
+                        <!-- Hidden input -->
+                        <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
+                        <input type="hidden" name="meja" value="<?php echo $meja ?>">
+                        <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
 
-                <!-- Table wrapper -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
-                        <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-200">
-                            <tr>
-                                <th class="px-4 py-3 border-b">Menu</th>
-                                <th class="px-4 py-3 border-b">Harga</th>
-                                <th class="px-4 py-3 border-b">Jumlah</th>
-                                <th class="px-4 py-3 border-b">Catatan</th>
-                                <th class="px-4 py-3 border-b">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $total = 0;
-                            foreach ($result as $row) {
-                                $total += $row['harganya'];
-                            ?>
-                                <tr class="bg-white dark:bg-gray-800 border-b">
-                                    <td class="px-4 py-3"><?php echo $row['nama_menu']; ?></td>
-                                    <td class="px-4 py-3"><?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
-                                    <td class="px-4 py-3"><?php echo $row['jumlah']; ?></td>
-                                    <td class="px-4 py-3"><?php echo $row['catatan']; ?></td>
-                                    <td class="px-4 py-3"><?php echo number_format($row['harganya'], 0, ',', '.'); ?></td>
-                                </tr>
-                            <?php } ?>
-                            <tr class="bg-gray-100 dark:bg-gray-800 font-semibold">
-                                <td colspan="4" class="px-4 py-3 text-right">Total Harga</td>
-                                <td class="px-4 py-3"><?php echo number_format($total, 0, ',', '.'); ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <!-- Table wrapper -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                                <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-200">
+                                    <tr>
+                                        <th class="px-4 py-3 border-b">Menu</th>
+                                        <th class="px-4 py-3 border-b">Harga</th>
+                                        <th class="px-4 py-3 border-b">Jumlah</th>
+                                        <th class="px-4 py-3 border-b">Catatan</th>
+                                        <th class="px-4 py-3 border-b">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $total = 0;
+                                    foreach ($result as $row) {
+                                        $total += $row['harganya'];
+                                    ?>
+                                        <tr class="bg-white dark:bg-gray-800 border-b">
+                                            <td class="px-4 py-3"><?php echo $row['nama_menu']; ?></td>
+                                            <td class="px-4 py-3"><?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
+                                            <td class="px-4 py-3"><?php echo $row['jumlah']; ?></td>
+                                            <td class="px-4 py-3"><?php echo $row['catatan']; ?></td>
+                                            <td class="px-4 py-3"><?php echo number_format($row['harganya'], 0, ',', '.'); ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    <tr class="bg-gray-100 dark:bg-gray-800 font-semibold">
+                                        <td colspan="4" class="px-4 py-3 text-right">Total Harga</td>
+                                        <td class="px-4 py-3"><?php echo number_format($total, 0, ',', '.'); ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                <!-- Input Jumlah Porsi -->
-                <div class="mt-4">
-                    <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
-                    <input type="text" name="jumlah" id="jumlah" required value="<?php echo $row['jumlah'] ?>" placeholder="Jumlah Porsi"
-                        class="w-full p-2.5 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                </div>
-
-                <!-- Tombol Submit -->
-                <div class="mt-6 flex justify-end">
-                    <button type="submit" name="input_order_item_validate"
-                        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 11 0 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 11 0-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                        </svg>
-                        Tambah Item
-                    </button>
-                </div>
-            </form>
-        </div>
-        
-    </div>
+                        <!-- Input Nominal Uang -->
+                        <div class="mt-4">
+                            <label for="jumlah" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white"> Nominal Uang</label>
+                            <div class="flex items-center">
+                                <span class="text-3xl font-bold mr-2 dark:text-white">Rp.</span>
+                                <input type="text" name="jumlah" id="jumlah" placeholder="Nominal Uang"
+                                    class="w-full md:w-[200px] p-2.5 text-2xl text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                             </div>
+                        </div>
+
+                        <!-- Tombol Submit -->
+                        <div class="mt-6 flex justify-end">
+                            <button type="submit" name="input_order_item_validate"
+                                class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 11 0 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 11 0-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                                </svg>
+                                Bayar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <?php } ?>
 
 
@@ -476,12 +478,12 @@ if ($id_order > 0) {
                             <!-- Jumlah Porsi -->
                             <div class="col-span-2">
                                 <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
-                                <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['jumlah'] ?>" >
+                                <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['jumlah'] ?>">
                             </div>
                             <!-- catatan -->
                             <div class="col-span-2">
                                 <label for="catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
-                                <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required=""  value="<?php echo $row['catatan'] ?>">
+                                <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="" value="<?php echo $row['catatan'] ?>">
                             </div>
                         </div>
                         <!-- SUbmit -->
@@ -514,25 +516,25 @@ if ($id_order > 0) {
 
                     <form action="proses/proses_delete_order_item.php" method="POST" class="p-4 md:p-5">
                         <input type="hidden" name="id" value="<?php echo $row['id_list_order']; ?>">
-                                                <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
+                        <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
 
                         <div class="p-4 md:p-5 text-center">
                             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                     <h3 class="mb-1 text-lg font-normal text-gray-500 dark:text-gray-400">
-                        Apakah anda yakin menghapus order
-                     </h3>
-                     <h3 class="mb-1 text-xl font-normal text-gray-500 dark:text-gray-400">  
-                        <span class="font-bold text-black dark:text-white">Menu :  <?php echo $row['nama_menu']; ?></span>
-                     </h3>
-                     <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">  
-                        <span class="font-bold text-black dark:text-white">Jumlah :  <?php echo $row['jumlah']; ?></span>
-                     </h3>
-                     <button data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>" name="delete_order_item_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                        Hapus
-                     </button>
-                     <button data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
+                            <h3 class="mb-1 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                Apakah anda yakin menghapus order
+                            </h3>
+                            <h3 class="mb-1 text-xl font-normal text-gray-500 dark:text-gray-400">
+                                <span class="font-bold text-black dark:text-white">Menu : <?php echo $row['nama_menu']; ?></span>
+                            </h3>
+                            <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">
+                                <span class="font-bold text-black dark:text-white">Jumlah : <?php echo $row['jumlah']; ?></span>
+                            </h3>
+                            <button data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>" name="delete_order_item_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                Hapus
+                            </button>
+                            <button data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
                         </div>
                 </div>
             </div>
