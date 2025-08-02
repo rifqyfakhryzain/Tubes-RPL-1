@@ -70,33 +70,15 @@ while ($record = mysqli_fetch_assoc($query)) {
          <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg p-10 space-y-6">
 
             <!-- Judul About -->
-            <h3 class="text-1xl font-bold text-grey-900 dark:text-white">Halaman Order Item</h3>
+            <h3 class="text-1xl font-bold text-grey-900 dark:text-white">Halaman Reservasi Meja</h3>
 
             <!-- Konten -->
             <div class="relative overflow-x-auto">
-               <div class="flex gap-4 mb-5">
-                  <!-- Button Lihat -->
-                  <a href="order.php">
-                     <button type="button"
-                        class="flex items-center justify-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4" />
-                        </svg>
-
-                     </button>
-                  </a>
-               </div>
-
-
                <!-- Validasi Jika data menu tidak ada -->
                <?php
                if (empty($result)) {
                   echo "<p class='text-red-500'>Data Menu tidak ada</p>";
                } else {
-
-
-
-
                ?>
                   <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -136,35 +118,38 @@ while ($record = mysqli_fetch_assoc($query)) {
                               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                  <?= $no++; ?>
                               </th>
-                              <!-- Harga -->
+                              <!-- No Meja -->
                               <td class="px-6 py-4">
                                  <?php echo $row['no_meja'] ?>
                               </td>
-                              <!-- Jumlah Pesanan -->
+                              <!-- Catatan -->
                               <td class="px-6 py-4">
                                  <?php echo $row['catatan'] ?>
                               </td>
                               <!-- Status -->
                               <td class="px-6 py-4">
                                  <?php
-                                 if ($row['status'] == 0) {
-                                    echo "Meja Tersedia";
-                                 } elseif ($row['status'] == 1) {
-                                    echo "Meja Tidak Tersedia";
-                                 } else {
-                                    echo "Status Tidak Dikenal";
-                                 }
+                                    if ($row['status'] == 0) {
+                                       echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300 whitespace-nowrap">
+                                       Meja Tersedia
+                                       </span>';
+                                    } elseif ($row['status'] == 1) {
+                                       echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">
+                                       Meja Penuh
+                                       </span>';
+                                    } else {
+                                       echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-gray-800 bg-gray-100 rounded-full dark:bg-gray-900 dark:text-gray-300 whitespace-nowrap">
+                                       Status Tidak Dikenal
+                                       </span>';
+                                    }
                                  ?>
                               </td>
-
                               <!-- Aksi -->
                               <td class="px-6 py-4">
                                  <div class="flex gap-2">
-                                    <!-- Button Terima -->
                                     <?php
                                     $status = $row['status']; // Diambil dari tabel_list_order
                                     ?>
-
                                     <!-- Tombol Reservasi -->
                                     <button type="button"
                                        data-modal-target="meja-modal-<?php echo $row['id_meja']; ?>"
@@ -188,13 +173,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                                        <?php echo ($status == 0) ? 'disabled' : ''; ?>>
                                        Selesai
                                     </button>
-
                                  </div>
-
-
                               </td>
-
-
                            </tr>
                         <?php
 
@@ -229,7 +209,7 @@ while ($record = mysqli_fetch_assoc($query)) {
    <?php
    foreach ($result as $row) { ?>
 
-      <!-- Modal terima Item -->
+      <!-- Modal terima Reservasi -->
       <!-- Main modal -->
       <div id="meja-modal-<?php echo $row['id_meja']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
          <div class="relative p-4 w-full max-w-md max-h-full">
@@ -238,7 +218,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                <!-- Modal header -->
                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                     Edit Order
+                     Reservasi
                   </h3>
 
                   <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="meja-modal-<?php echo $row['id_meja']; ?>">
@@ -249,15 +229,15 @@ while ($record = mysqli_fetch_assoc($query)) {
                   </button>
                </div>
                <!-- Modal body dan Form -->
-               <form action="proses/proses_terima_order_item.php" method="POST" class="p-4 md:p-5">
+               <form action="proses/proses_terima_reservasi.php" method="POST" class="p-4 md:p-5">
                   <input type="hidden" name="id" value="<?php echo $row['id_meja'] ?>">
                   <div class="grid gap-4 mb-4 grid-cols-2">
 
 
                      <!-- Jumlah Porsi -->
                      <div class="col-span-2">
-                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
-                        <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['no_meja'] ?>">
+                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomer Meja</label>
+                        <input type="text" disabled name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['no_meja'] ?>">
                      </div>
                      <!-- catatan -->
                      <div class="col-span-2">
@@ -266,11 +246,11 @@ while ($record = mysqli_fetch_assoc($query)) {
                      </div>
                   </div>
                   <!-- SUbmit -->
-                  <button type="submit" name="terima_order_item_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button type="submit" name="terima_reservasi_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                      <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                      </svg>
-                     Edit Item
+                     Reservasi
                   </button>
                </form>
             </div>
@@ -281,7 +261,7 @@ while ($record = mysqli_fetch_assoc($query)) {
    <?php
    foreach ($result as $row) { ?>
 
-      <!-- Modal terima Item -->
+      <!-- Modal selesai reservasi -->
       <!-- Main modal -->
       <div id="meja-tersedia-modal-<?php echo $row['id_meja']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
          <div class="relative p-4 w-full max-w-md max-h-full">
@@ -290,7 +270,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                <!-- Modal header -->
                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                     Edit Order
+                     Reservasi
                   </h3>
 
                   <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="meja-tersedia-modal-<?php echo $row['id_meja']; ?>">
@@ -301,14 +281,14 @@ while ($record = mysqli_fetch_assoc($query)) {
                   </button>
                </div>
                <!-- Modal body dan Form -->
-               <form action="proses/proses_siapsaji_order_item.php" method="POST" class="p-4 md:p-5">
+               <form action="proses/proses_selesai_reservasi.php" method="POST" class="p-4 md:p-5">
                   <input type="hidden" name="id" value="<?php echo $row['id_meja'] ?>">
                   <div class="grid gap-4 mb-4 grid-cols-2">
 
 
-                     <!-- Jumlah Porsi -->
+                     <!-- Nomer Meja -->
                      <div class="col-span-2">
-                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
+                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomer Meja</label>
                         <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['no_meja'] ?>">
                      </div>
                      <!-- catatan -->
@@ -318,11 +298,11 @@ while ($record = mysqli_fetch_assoc($query)) {
                      </div>
                   </div>
                   <!-- SUbmit -->
-                  <button type="submit" name="siapsaji_order_item_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button type="submit" name="selesai_reservasi_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                      <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                      </svg>
-                     Edit Item
+                     Selesai
                   </button>
                </form>
             </div>

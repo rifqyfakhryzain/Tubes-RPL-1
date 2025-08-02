@@ -27,19 +27,21 @@ $result = [];
 $kode = '';
 $meja = '';
 $pelanggan = '';
+$waktu_order = '';
 
 if ($id_order > 0) {
     // Ambil informasi order (kode_order, meja, pelanggan)
-    $q_info = mysqli_query($conn, "SELECT kode_order, meja, pelanggan FROM tabel_order WHERE id_order = $id_order");
+    $q_info = mysqli_query($conn, "SELECT kode_order, meja,waktu_order, pelanggan FROM tabel_order WHERE id_order = $id_order");
     if ($info = mysqli_fetch_assoc($q_info)) {
         $kode = $info['kode_order'];
         $meja = $info['meja'];
         $pelanggan = $info['pelanggan'];
+        $waktu_order = $info['waktu_order'];
     }
 
     // Ambil detail list order + menu
     $query = mysqli_query($conn, "
-        SELECT *, SUM(harga * jumlah) AS harganya 
+        SELECT *, SUM(harga * jumlah) AS harganya,tabel_order.waktu_order
         FROM tabel_order
         LEFT JOIN tabel_list_order ON tabel_list_order.kode_order = tabel_order.id_order
         LEFT JOIN tabel_daftar_menu ON tabel_daftar_menu.id = tabel_list_order.menu
@@ -90,7 +92,7 @@ if ($id_order > 0) {
                 <!-- Konten -->
                 <div class="relative overflow-x-auto">
                     <div class="flex gap-4 mb-5">
-                        <!-- Button Lihat -->
+                        <!-- Button Kembali -->
                         <a href="order.php">
                             <button type="button"
                                 class="flex items-center justify-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -206,45 +208,45 @@ if ($id_order > 0) {
                                         <!-- Aksi -->
                                         <td class="px-6 py-4">
                                             <div class="flex gap-2">
-<?php $dibayar = !empty($row['id_bayar']); ?>
+                                                <?php $dibayar = !empty($row['id_bayar']); ?>
 
-<!-- Button Edit -->
-<button type="button"
-    data-modal-target="edit-modal-<?php echo $row['id_list_order']; ?>"
-    data-modal-toggle="edit-modal-<?php echo $row['id_list_order']; ?>"
-    <?php if ($dibayar) echo 'disabled'; ?>
-    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
-        <?php echo $dibayar
-            ? 'text-white bg-gray-400 cursor-not-allowed'
-            : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
-        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-        width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-    </svg>
-</button>
+                                                <!-- Button Edit -->
+                                                <button type="button"
+                                                    data-modal-target="edit-modal-<?php echo $row['id_list_order']; ?>"
+                                                    data-modal-toggle="edit-modal-<?php echo $row['id_list_order']; ?>"
+                                                    <?php if ($dibayar) echo 'disabled'; ?>
+                                                    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+                                                    <?php echo $dibayar
+                                                        ? 'text-white bg-gray-400 cursor-not-allowed'
+                                                        : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
+                                                    <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+                                                    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
+                                                    </svg>
+                                                </button>
 
 
                                                 <!-- Button Delete -->
-<?php $dibayar = !empty($row['id_bayar']); ?>
+                                                <?php $dibayar = !empty($row['id_bayar']); ?>
 
-<!-- Tombol Delete -->
-<button type="button"
-    data-modal-target="popup-modal-<?= $row['id_list_order']; ?>"
-    data-modal-toggle="popup-modal-<?= $row['id_list_order']; ?>"
-    <?php if ($dibayar) echo 'disabled'; ?>
-    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+                                                <!-- Tombol Delete -->
+                                                <button type="button"
+                                                    data-modal-target="popup-modal-<?= $row['id_list_order']; ?>"
+                                                    data-modal-toggle="popup-modal-<?= $row['id_list_order']; ?>"
+                                                    <?php if ($dibayar) echo 'disabled'; ?>
+                                                    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
         <?php echo $dibayar
-            ? 'text-white bg-gray-400 cursor-not-allowed'
-            : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
+                                        ? 'text-white bg-gray-400 cursor-not-allowed'
+                                        : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
         <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-    </svg>
-</button>
+                                                    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                    </svg>
+                                                </button>
                                             </div>
 
 
@@ -267,39 +269,49 @@ if ($id_order > 0) {
                         </table>
                         <div class="w-full flex justify-start sm:justify-end">
                             <!-- Button Tambah Item -->
-<?php
-$dibayar = !empty($row['id_bayar']); // true jika sudah dibayar
-?>
+                            <?php
+                            $dibayar = !empty($row['id_bayar']); // true jika sudah dibayar
+                            ?>
 
-<button type="button"
-    data-modal-target="item-modal"
-    data-modal-toggle="item-modal"
-    <?php if ($dibayar) echo 'disabled'; ?>
-    class="flex items-center text-white font-medium rounded-lg text-base px-4 py-2 mb-5 mr-2 whitespace-nowrap
+                            <button type="button"
+                                data-modal-target="item-modal"
+                                data-modal-toggle="item-modal"
+                                <?php if ($dibayar) echo 'disabled'; ?>
+                                class="flex items-center text-white font-medium rounded-lg text-base px-4 py-2 mb-5 mr-2 whitespace-nowrap
         <?php echo $dibayar
-            ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'; ?>
+                            ? 'bg-gray-400 cursor-not-allowed'
+                            : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'; ?>
         <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 12h14m-7 7V5" />
-    </svg>
-    <span class="ml-2">Item</span>
-</button>
-<!-- Button Bayar Item -->
-<?php $sudah_bayar = !empty($row['id_bayar']); ?>
-<button 
-    type="button" 
-    data-modal-target="bayar-modal" 
-    data-modal-toggle="bayar-modal"
-    class="flex items-center text-white <?php echo $sudah_bayar ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300'; ?> font-medium rounded-lg text-base px-4 py-2 mb-5 dark:<?php echo $sudah_bayar ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-800'; ?> focus:outline-none whitespace-nowrap"
-    <?php echo $sudah_bayar ? 'disabled' : ''; ?>>
-    <svg class="w-5 h-5 text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
-    </svg>
-    Bayar
-</button>
+                                <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 12h14m-7 7V5" />
+                                </svg>
+                                <span class="ml-2">Item</span>
+                            </button>
+                            <!-- Button Bayar Item -->
+                            <?php $sudah_bayar = !empty($row['id_bayar']); ?>
+                            <button
+                                type="button"
+                                data-modal-target="bayar-modal"
+                                data-modal-toggle="bayar-modal"
+                                class="flex items-center text-white <?php echo $sudah_bayar ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300'; ?> mr-2 font-medium rounded-lg text-base px-4 py-2 mb-5 dark:<?php echo $sudah_bayar ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-800'; ?> focus:outline-none whitespace-nowrap"
+                                <?php echo $sudah_bayar ? 'disabled' : ''; ?>>
+                                <svg class="w-5 h-5 text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
+                                </svg>
+                                Bayar
+                            </button>
+                            <!-- Button Cetak Struk -->
+                            <button
+                                type="button" onclick="printStruk()"
+                                class="flex items-center text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 mr-2 font-medium rounded-lg text-base px-4 py-2 mb-5 focus:outline-none whitespace-nowrap dark:focus:ring-yellow-900">
+                                <svg class="w-5 h-5 text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6h4V7H5v10h4z" />
+                                </svg>
+                                Cetak Struk
+                            </button>
+
 
 
                         </div>
@@ -312,6 +324,9 @@ $dibayar = !empty($row['id_bayar']); // true jika sudah dibayar
 
             </div>
         </div>
+
+
+
 
         <!-- Footer -->
         <footer class="bg-white rounded-lg m-4">
@@ -454,7 +469,7 @@ $dibayar = !empty($row['id_bayar']); // true jika sudah dibayar
                             <label for="uang" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white"> Nominal Uang</label>
                             <div class="flex items-center">
                                 <span class="text-3xl font-bold mr-2 dark:text-white">Rp.</span>
-                                <input type="text" name="uang"  id="uang" required placeholder="Nominal Uang"
+                                <input type="text" name="uang" id="uang" required placeholder="Nominal Uang"
                                     class="w-full md:w-[200px] p-2.5 text-2xl text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                             </div>
                         </div>
