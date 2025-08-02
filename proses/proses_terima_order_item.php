@@ -14,16 +14,16 @@ $message = "";
 
 if (isset($_POST['terima_order_item_validate'])) {
         // INSERT ke database
-        $query = mysqli_query($conn, "UPDATE tabel_list_order SET menu='$menu',jumlah='$jumlah',catatan='$catatan' WHERE id_list_order = '$id'");
+        $query = mysqli_query($conn, "UPDATE tabel_list_order SET catatan='$catatan', status=1 WHERE id_list_order = '$id'");
 
         if ($query) {
             $message = '<script>
-                alert("Data berhasil dimasukkan.");
-                window.location.href = "../order_item.php?id_order=' . $kode_order . '";
+                alert("Berhasil diterima oleh dapur.");
+                window.location.href = "../dapur.php";
             </script>';
         } else {
             $message = '<script>
-                alert("Terjadi kesalahan: ' . mysqli_error($conn) . '");
+                alert("Gagal di terima oleh dapur ' . mysqli_error($conn) . '");
                 window.history.back();
             </script>';
         }
