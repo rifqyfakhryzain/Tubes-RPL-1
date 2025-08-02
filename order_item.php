@@ -326,6 +326,48 @@ if ($id_order > 0) {
         </div>
 
 
+        <!--  -->
+        <div id="strukContent" hidden>
+            <h2>Struk Pembayaran Dapoer Resto</h2>
+            <p>Kode Order : <?php echo $kode; ?> </p>
+            <p>Meja : <?php echo $meja; ?> </p>
+            <p>Pelanggan : <?php echo $pelanggan; ?> </p>
+            <p>Waktu Order : <?php echo date('d/m/Y H:i', strtotime($waktu_order)); ?> </p>
+
+            <table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 100%; margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>Menu</th>
+                        <!-- <th>Harga</th> -->
+                        <th>Jumlah</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $total = 0;
+                    foreach ($result as $row) {
+                        $total += $row['harganya'];
+                    ?>
+                        <tr>
+                            <td><?php echo $row['nama_menu']; ?></td>
+                            <td><?php echo $row['jumlah']; ?></td>
+                            <td>Rp <?php echo number_format($row['harganya'], 0, ',', '.'); ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align:right;"><b>Total Harga:</b></td>
+                        <td><b>Rp <?php echo number_format($total, 0, ',', '.'); ?></b></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+
+
 
 
         <!-- Footer -->
