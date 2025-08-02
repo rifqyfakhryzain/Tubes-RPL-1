@@ -107,9 +107,9 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                <!-- Validasi Jika data menu tidak ada -->
                <?php
-if (empty($result)) {
-   echo "<p class='text-red-500'>Data Menu tidak ada</p>";
-} else {
+               if (empty($result)) {
+                  echo "<p class='text-red-500'>Data Menu tidak ada</p>";
+               } else {
 
 
 
@@ -192,45 +192,35 @@ if (empty($result)) {
                               <!-- Aksi -->
                               <td class="px-6 py-4">
                                  <div class="flex gap-2">
-                                    <?php $dibayar = !empty($row['id_bayar']); ?>
+                                    <!-- Button Terima -->
+                                    <?php
+                                    $status = $row['status']; // Diambil dari tabel_list_order
+                                    ?>
 
-                                    <!-- Button Edit -->
+                                    <!-- Tombol TERIMA -->
                                     <button type="button"
-                                       data-modal-target="edit-modal-<?php echo $row['status']; ?>"
-                                       data-modal-toggle="edit-modal-<?php echo $row['status']; ?>"
-                                       <?php if ($dibayar) echo 'disabled'; ?>
+                                       data-modal-target="terima-modal-<?php echo $row['id_list_order']; ?>"
+                                       data-modal-toggle="terima-modal-<?php echo $row['id_list_order']; ?>"
                                        class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
-        <?php echo $dibayar
-                              ? 'text-white bg-gray-400 cursor-not-allowed'
-                              : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
-        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-                                       <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                          width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                             d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-                                       </svg>
+                                       <?php echo ($status == 0)
+                                       ? 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 focus:outline-none'
+                                       : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
+                                       <?php echo ($status == 1) ? 'disabled' : ''; ?>>
+                                       Terima
                                     </button>
 
-
-                                    <!-- Button Delete -->
-                                    <?php $dibayar = !empty($row['id_bayar']); ?>
-
-                                    <!-- Tombol Delete -->
+                                    <!-- Tombol SIAP SAJI -->
                                     <button type="button"
-                                       data-modal-target="popup-modal-<?= $row['status']; ?>"
-                                       data-modal-toggle="popup-modal-<?= $row['status']; ?>"
-                                       <?php if ($dibayar) echo 'disabled'; ?>
+                                       data-modal-target="siapsaji-modal-<?php echo $row['id_list_order']  ?>"
+                                       data-modal-toggle="siapsaji-modal-<?php echo $row['id_list_order']  ?>"
                                        class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
-        <?php echo $dibayar
-                              ? 'text-white bg-gray-400 cursor-not-allowed'
-                              : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
-        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-                                       <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                          viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                             d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                       </svg>
+                                       <?php echo ($status == 1)
+                                       ? 'text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:outline-none'
+                                       : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
+                                       <?php echo ($status == 0) ? 'disabled' : ''; ?>>
+                                       Siap Saji
                                     </button>
+
                                  </div>
 
 
@@ -239,7 +229,7 @@ if (empty($result)) {
 
                            </tr>
                         <?php
-                           
+
                         } ?>
 
                      </tbody>
@@ -268,80 +258,80 @@ if (empty($result)) {
 
 
 
-   <?php
-   foreach ($result as $row) { ?>
-      <!-- Modal Edit Item -->
-      <!-- Main modal -->
-      <div id="edit-modal-<?php echo $row['status']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-         <div class="relative p-4 w-full max-w-md max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-               <!-- Modal header -->
-               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                     Edit Order
-                  </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-modal-<?php echo $row['status']; ?>">
-                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                     </svg>
-                     <span class="sr-only">Close modal</span>
-                  </button>
-               </div>
-               <!-- Modal body dan Form -->
-               <form action="proses/proses_edit_order_item.php" method="POST" class="p-4 md:p-5">
-                  <input type="hidden" name="id" value="<?php echo $row['id_list_order'] ?>">
-                  <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
-                  <input type="hidden" name="meja" value="<?php echo $meja ?>">
-                  <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
-                  <div class="grid gap-4 mb-4 grid-cols-2">
-                     <!-- Nama Menu-->
-                     <div class="col-span-2">
-                        <select name="menu" id="menu" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                           <option value="" disabled selected hidden>Pilih Menu</option>
-                           <?php $menu_terpilih = $row['menu']; ?>
+    <?php
+    foreach ($result as $row) { ?>
+        <!-- Modal Edit Item -->
+        <!-- Main modal -->
+        <div id="terima-modal-<?php echo $row['id_list_order']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            Edit Order
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-modal-terima-modal-<?php echo $row['id_list_order']; ?>">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body dan Form -->
+                    <form action="proses/proses_edit_order_item.php" method="POST" class="p-4 md:p-5">
+                        <input type="hidden" name="id" value="<?php echo $row['id_list_order'] ?>">
+                        <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
+                        <input type="hidden" name="meja" value="<?php echo $meja ?>">
+                        <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
+                        <div class="grid gap-4 mb-4 grid-cols-2">
+                            <!-- Nama Menu-->
+                            <div class="col-span-2">
+                                <select name="menu" id="menu" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="" disabled selected hidden>Pilih Menu</option>
+                                    <?php $menu_terpilih = $row['menu']; ?>
 
-                           <?php foreach ($menu_result as $menuRow): ?>
-                              <option value="<?= $menuRow['id'] ?>" <?= ($menuRow['id'] == $menu_terpilih) ? 'selected' : '' ?>>
-                                 <?= $menuRow['nama_menu'] ?>
-                              </option>
-                           <?php endforeach; ?>
+                                    <?php foreach ($menu_result as $menuRow): ?>
+                                        <option value="<?= $menuRow['id'] ?>" <?= ($menuRow['id'] == $menu_terpilih) ? 'selected' : '' ?>>
+                                            <?= $menuRow['nama_menu'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
 
-                        </select>
-                     </div>
-                     <!-- Jumlah Porsi -->
-                     <div class="col-span-2">
-                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
-                        <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['jumlah'] ?>">
-                     </div>
-                     <!-- catatan -->
-                     <div class="col-span-2">
-                        <label for="catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
-                        <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="" value="<?php echo $row['catatan'] ?>">
-                     </div>
-                  </div>
-                  <!-- SUbmit -->
-                  <button type="submit" name="edit_order_item_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                     </svg>
-                     Edit Item
-                  </button>
-               </form>
+                                </select>
+                            </div>
+                            <!-- Jumlah Porsi -->
+                            <div class="col-span-2">
+                                <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
+                                <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="" value="<?php echo $row['jumlah'] ?>">
+                            </div>
+                            <!-- catatan -->
+                            <div class="col-span-2">
+                                <label for="catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
+                                <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="" value="<?php echo $row['catatan'] ?>">
+                            </div>
+                        </div>
+                        <!-- SUbmit -->
+                        <button type="submit" name="edit_order_item_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            Edit Item
+                        </button>
+                    </form>
+                </div>
             </div>
-         </div>
-      </div>
-   <?php } ?>
+        </div>
+    <?php } ?>
 
 
 
    <?php
    foreach ($result as $row) { ?>
       <!-- modal Delete -->
-      <div id="popup-modal-<?= $row['status']; ?>" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div id="siapsaji-modal-<?php echo $row['status']; ?>" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
          <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-               <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-<?= $row['status']; ?>">
+               <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="siapsaji-modal-<?php echo $row['status'] ?>">
                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                   </svg>
@@ -365,10 +355,10 @@ if (empty($result)) {
                      <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">
                         <span class="font-bold text-black dark:text-white">Jumlah : <?php echo $row['jumlah']; ?></span>
                      </h3>
-                     <button data-modal-hide="popup-modal-<?= $row['status']; ?>" name="delete_order_item_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                     <button data-modal-hide="siapsaji-modal-<?php echo $row['status']; ?>" name="delete_order_item_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                         Hapus
                      </button>
-                     <button data-modal-hide="popup-modal-<?= $row['status']; ?>" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
+                     <button data-modal-hide="siapsaji-modal-<?php echo $row['status']; ?>" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
                   </div>
             </div>
          </div>
