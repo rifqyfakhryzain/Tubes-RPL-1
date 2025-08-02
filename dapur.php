@@ -196,8 +196,8 @@ if (empty($result)) {
 
                                     <!-- Button Edit -->
                                     <button type="button"
-                                       data-modal-target="edit-modal-<?php echo $row['id_list_order']; ?>"
-                                       data-modal-toggle="edit-modal-<?php echo $row['id_list_order']; ?>"
+                                       data-modal-target="edit-modal-<?php echo $row['status']; ?>"
+                                       data-modal-toggle="edit-modal-<?php echo $row['status']; ?>"
                                        <?php if ($dibayar) echo 'disabled'; ?>
                                        class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
         <?php echo $dibayar
@@ -217,8 +217,8 @@ if (empty($result)) {
 
                                     <!-- Tombol Delete -->
                                     <button type="button"
-                                       data-modal-target="popup-modal-<?= $row['id_list_order']; ?>"
-                                       data-modal-toggle="popup-modal-<?= $row['id_list_order']; ?>"
+                                       data-modal-target="popup-modal-<?= $row['status']; ?>"
+                                       data-modal-toggle="popup-modal-<?= $row['status']; ?>"
                                        <?php if ($dibayar) echo 'disabled'; ?>
                                        class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
         <?php echo $dibayar
@@ -265,156 +265,6 @@ if (empty($result)) {
 
    </main>
 
-   <!-- Modal Tambah Item -->
-   <!-- Main modal -->
-   <?php
-   foreach ($result as $row) { ?>
-      <div id="item-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-         <div class="relative p-4 w-full max-w-md max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-               <!-- Modal header -->
-               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                     Tambah Item
-                  </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="item-modal">
-                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                     </svg>
-                     <span class="sr-only">Close modal</span>
-                  </button>
-               </div>
-               <!-- Modal body dan Form -->
-               <form action="proses/proses_input_order_item.php" method="POST" class="p-4 md:p-5">
-                  <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
-                  <input type="hidden" name="meja" value="<?php echo $meja ?>">
-                  <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
-                  <div class="grid gap-4 mb-4 grid-cols-2">
-                     <!-- Nama Menu-->
-                     <div class="col-span-2">
-                        <select name="menu" id="menu" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                           <option value="" disabled selected hidden>Pilih Menu</option>
-                           <?php foreach ($menu_result as $row): ?>
-                              <option value="<?= $row['id'] ?>"><?= $row['nama_menu'] ?></option>
-                           <?php endforeach; ?>
-
-                        </select>
-                     </div>
-                     <!-- Jumlah Porsi -->
-                     <div class="col-span-2">
-                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>
-                        <input type="text" name="jumlah" id="jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah Porsi" required="">
-                     </div>
-                     <!-- catatan -->
-                     <div class="col-span-2">
-                        <label for="catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
-                        <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="">
-                     </div>
-                  </div>
-                  <!-- SUbmit -->
-                  <button type="submit" name="input_order_item_validate" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                     </svg>
-                     Tambah Item
-                  </button>
-               </form>
-            </div>
-         </div>
-      </div>
-      </div>
-   <?php } ?>
-
-   <!-- Modal Bayar Item -->
-   <!-- Main modal -->
-   <?php
-   foreach ($result as $row) { ?>
-      <div id="bayar-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-         <div class="relative p-4 w-full max-w-4xl max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-               <!-- Modal header -->
-               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                     Pembayaran
-                  </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="bayar-modal">
-                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                     </svg>
-                     <span class="sr-only">Close modal</span>
-                  </button>
-               </div>
-
-
-
-               <!-- Modal Body  Form -->
-               <form action="proses/proses_bayar.php" method="POST" class="p-4 md:p-5">
-                  <!-- Hidden input -->
-                  <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
-                  <input type="hidden" name="meja" value="<?php echo $meja ?>">
-                  <input type="hidden" name="total" value="<?php echo $total ?>">
-
-                  <!-- Table wrapper -->
-                  <div class="overflow-x-auto">
-                     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
-                        <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-200">
-                           <tr>
-                              <th class="px-4 py-3 border-b">Menu</th>
-                              <th class="px-4 py-3 border-b">Harga</th>
-                              <th class="px-4 py-3 border-b">Jumlah</th>
-                              <th class="px-4 py-3 border-b">Catatan</th>
-                              <th class="px-4 py-3 border-b">Total</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <?php
-                           $total = 0;
-                           foreach ($result as $row) {
-                              $total += $row['harganya'];
-                           ?>
-                              <tr class="bg-white dark:bg-gray-800 border-b">
-                                 <td class="px-4 py-3"><?php echo $row['nama_menu']; ?></td>
-                                 <td class="px-4 py-3"><?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
-                                 <td class="px-4 py-3"><?php echo $row['jumlah']; ?></td>
-                                 <td class="px-4 py-3"><?php echo $row['catatan']; ?></td>
-                                 <td class="px-4 py-3"><?php echo number_format($row['harganya'], 0, ',', '.'); ?></td>
-                              </tr>
-                           <?php } ?>
-                           <tr class="bg-gray-100 dark:bg-gray-800 font-semibold">
-                              <td colspan="4" class="px-4 py-3 text-right">Total Harga</td>
-                              <td class="px-4 py-3"><?php echo number_format($total, 0, ',', '.'); ?></td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </div>
-
-                  <!-- Input Nominal Uang -->
-                  <div class="mt-4">
-                     <label for="uang" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white"> Nominal Uang</label>
-                     <div class="flex items-center">
-                        <span class="text-3xl font-bold mr-2 dark:text-white">Rp.</span>
-                        <input type="text" name="uang" id="uang" required placeholder="Nominal Uang"
-                           class="w-full md:w-[200px] p-2.5 text-2xl text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                     </div>
-                  </div>
-
-                  <!-- Tombol Submit -->
-                  <div class="mt-6 flex justify-end">
-                     <button type="submit" name="bayar_validate"
-                        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 11 0 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 11 0-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                        </svg>
-                        Bayar
-                     </button>
-                  </div>
-               </form>
-            </div>
-         </div>
-      </div>
-   <?php } ?>
 
 
 
@@ -422,7 +272,7 @@ if (empty($result)) {
    foreach ($result as $row) { ?>
       <!-- Modal Edit Item -->
       <!-- Main modal -->
-      <div id="edit-modal-<?php echo $row['id_list_order']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div id="edit-modal-<?php echo $row['status']; ?>" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
          <div class="relative p-4 w-full max-w-md max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -431,7 +281,7 @@ if (empty($result)) {
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                      Edit Order
                   </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-modal-<?php echo $row['id_list_order']; ?>">
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-modal-<?php echo $row['status']; ?>">
                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                      </svg>
@@ -488,10 +338,10 @@ if (empty($result)) {
    <?php
    foreach ($result as $row) { ?>
       <!-- modal Delete -->
-      <div id="popup-modal-<?= $row['id_list_order']; ?>" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div id="popup-modal-<?= $row['status']; ?>" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
          <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-               <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>">
+               <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-<?= $row['status']; ?>">
                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                   </svg>
@@ -499,7 +349,7 @@ if (empty($result)) {
                </button>
 
                <form action="proses/proses_delete_order_item.php" method="POST" class="p-4 md:p-5">
-                  <input type="hidden" name="id" value="<?php echo $row['id_list_order']; ?>">
+                  <input type="hidden" name="id" value="<?php echo $row['status']; ?>">
                   <input type="hidden" name="kode_order" value="<?php echo $id_order; ?>">
 
                   <div class="p-4 md:p-5 text-center">
@@ -515,10 +365,10 @@ if (empty($result)) {
                      <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">
                         <span class="font-bold text-black dark:text-white">Jumlah : <?php echo $row['jumlah']; ?></span>
                      </h3>
-                     <button data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>" name="delete_order_item_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                     <button data-modal-hide="popup-modal-<?= $row['status']; ?>" name="delete_order_item_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                         Hapus
                      </button>
-                     <button data-modal-hide="popup-modal-<?= $row['id_list_order']; ?>" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
+                     <button data-modal-hide="popup-modal-<?= $row['status']; ?>" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
                   </div>
             </div>
          </div>
