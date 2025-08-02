@@ -367,7 +367,30 @@ if ($id_order > 0) {
 
 
 
+        <script>
+            function printStruk() {
+                var strukContent = document.getElementById("strukContent").innerHTML;
 
+                var printWindow = window.open('', '', 'height=600,width=800');
+                printWindow.document.write('<html><head><title>Struk Pembayaran</title>');
+                printWindow.document.write('<style>');
+                printWindow.document.write('body { font-family: Arial, sans-serif; padding: 20px; }');
+                printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 10px; }');
+                printWindow.document.write('th, td { border: 1px solid #000; padding: 8px; text-align: left; }');
+                printWindow.document.write('h2 { text-align: center; margin-bottom: 20px; }');
+                printWindow.document.write('</style>');
+                printWindow.document.write('</head><body>');
+                printWindow.document.write(strukContent);
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+
+                printWindow.onload = function() {
+                    printWindow.focus();
+                    printWindow.print();
+                    printWindow.close();
+                };
+            }
+        </script>
 
 
         <!-- Footer -->
