@@ -427,6 +427,8 @@ if ($id_order > 0) {
                         <div class="grid gap-4 mb-4 grid-cols-2">
 <!-- Kategori -->
 <div class="col-span-2">
+                                    <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+
     <select name="kategori" id="kategori" required
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
         <option value="" disabled selected hidden>Pilih Kategori</option>
@@ -437,6 +439,8 @@ if ($id_order > 0) {
 
 <!-- Nama Menu -->
 <div class="col-span-2">
+                                    <label for="menu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Menu</label>
+
     <select name="menu" id="menu" required disabled
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
         <option value="" disabled selected hidden>Pilih Menu</option>
@@ -448,7 +452,7 @@ if ($id_order > 0) {
     </select>
 </div>
 
-                            </div>
+                           
                             
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -620,20 +624,82 @@ if ($id_order > 0) {
                         <input type="hidden" name="meja" value="<?php echo $meja ?>">
                         <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
                         <div class="grid gap-4 mb-4 grid-cols-2">
-                            <!-- Nama Menu-->
-                            <div class="col-span-2">
-                                <select name="menu" id="menu" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option value="" disabled selected hidden>Pilih Menu</option>
-                                    <?php $menu_terpilih = $row['menu']; ?>
+<!-- Kategori -->
+<div class="col-span-2">
+  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+  <select name="kategori" class="kategori-edit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+    <option value="" disabled hidden <?= (!isset($row['kategori']) ? 'selected' : '') ?>>Pilih Kategori</option>
+    <option value="1" <?= (isset($row['kategori']) && $row['kategori'] == 1) ? 'selected' : '' ?>>Makanan</option>
+    <option value="2" <?= (isset($row['kategori']) && $row['kategori'] == 2) ? 'selected' : '' ?>>Minuman</option>
+  </select>
+</div>
 
-                                    <?php foreach ($menu_result as $menuRow): ?>
-                                        <option value="<?= $menuRow['id'] ?>" <?= ($menuRow['id'] == $menu_terpilih) ? 'selected' : '' ?>>
-                                            <?= $menuRow['nama_menu'] ?>
-                                        </option>
-                                    <?php endforeach; ?>
 
-                                </select>
-                            </div>
+
+
+
+
+<!-- Menu -->
+<div class="col-span-2">
+  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Menu</label>
+<select name="menu"
+    class="menu-edit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+    data-selected="<?= isset($row['menu']) ? $row['menu'] : '' ?>" required>
+    <option value="" disabled hidden <?= (!isset($row['menu']) ? 'selected' : '') ?>>Pilih Menu</option>
+    <?php
+    $query_menu = mysqli_query($conn, "SELECT id, nama_menu, kategori FROM tabel_daftar_menu");
+    while ($menu = mysqli_fetch_assoc($query_menu)) {
+      $selected = (isset($row['menu']) && $row['menu'] == $menu['id']) ? 'selected' : '';
+      echo "<option value='{$menu['id']}' data-kategori='{$menu['kategori']}' $selected>{$menu['nama_menu']}</option>";
+    }
+    ?>
+  </select>
+</div>
+
+
+                           
+                            
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".kategori-edit").forEach(function (kategoriSelect) {
+    const form = kategoriSelect.closest("form") || kategoriSelect.closest(".modal") || document;
+    const menuSelect = form.querySelector(".menu-edit");
+    if (!menuSelect) return;
+
+    const allOptions = Array.from(menuSelect.querySelectorAll("option[data-kategori]"));
+    const selectedMenu = menuSelect.dataset.selected || menuSelect.value;
+
+    function updateMenuOptions() {
+      const selectedKategori = kategoriSelect.value;
+
+      menuSelect.innerHTML = '<option value="" disabled hidden>Pilih Menu</option>';
+
+      allOptions.forEach(function (option) {
+        if (option.dataset.kategori === selectedKategori) {
+          const clone = option.cloneNode(true);
+          if (clone.value === selectedMenu) clone.selected = true;
+          menuSelect.appendChild(clone);
+        }
+      });
+
+      menuSelect.disabled = selectedKategori === "";
+    }
+
+    kategoriSelect.addEventListener("change", function () {
+      updateMenuOptions();
+    });
+
+    // 🛠️ Trigger saat awal jika kategori sudah terisi (edit form)
+    if (kategoriSelect.value !== "") {
+      updateMenuOptions();
+    }
+  });
+});
+
+</script>
+
+
+
                             <!-- Jumlah Porsi -->
                             <div class="col-span-2">
                                 <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>

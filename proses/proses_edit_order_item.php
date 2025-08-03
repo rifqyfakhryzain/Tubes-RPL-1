@@ -10,6 +10,7 @@ $meja = isset($_POST['meja']) ? htmlentities($_POST['meja']) : "";
 $pelanggan = isset($_POST['pelanggan']) ? htmlentities($_POST['pelanggan']) : "";
 $catatan = isset($_POST['catatan']) ? htmlentities($_POST['catatan']) : "";
 $menu = isset($_POST['menu']) ? htmlentities($_POST['menu']) : "";
+$kategori = isset($_POST['kategori']) ? htmlentities($_POST['kategori']) : "";
 $jumlah = isset($_POST['jumlah']) ? htmlentities($_POST['jumlah']) : "";
 
 // Ambil ID user dari session (pelayan)
@@ -19,7 +20,7 @@ $message = "";
 
 if (isset($_POST['edit_order_item_validate'])) {
     // INSERT ke database
-    $query = mysqli_query($conn, "UPDATE tabel_list_order SET menu='$menu',jumlah='$jumlah',catatan='$catatan' WHERE id_list_order = '$id'");
+    $query = mysqli_query($conn, "UPDATE tabel_list_order SET menu='$menu',kategori='$kategori' ,jumlah='$jumlah',catatan='$catatan' WHERE id_list_order = '$id'");
 
     if ($query) {
         $message = '<script>

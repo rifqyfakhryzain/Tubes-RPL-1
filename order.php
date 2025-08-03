@@ -306,24 +306,20 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Nomor Meja -->
                   <div class="grid grid-cols-5 gap-2">
                      <?php
-                     $query_meja = mysqli_query($conn, "SELECT id_meja, no_meja FROM tabel_reservasi ORDER BY no_meja ASC");
+
+                     $query_meja = mysqli_query($conn, "SELECT id_meja, no_meja FROM tabel_reservasi WHERE status != 1 ORDER BY no_meja ASC");
                      while ($row = mysqli_fetch_assoc($query_meja)) :
                         $id_meja = htmlspecialchars($row['id_meja']);
                         $no_meja = htmlspecialchars($row['no_meja']);
                      ?>
                         <label class="cursor-pointer">
                            <input type="radio" name="no_meja" value="<?= $id_meja ?>" class="peer hidden" required>
-                           <div class="p-2 text-center rounded-lg border border-gray-300 peer-checked:bg-blue-500 peer-checked:text-white hover:bg-blue-100">
+                           <div class="p-2 text-center rounded-lg border border-gray-300 peer-checked:bg-blue-500 peer-checked:text-white hover:bg-blue-100 text-red-500 ">
                               <?= $no_meja ?>
                            </div>
                         </label>
                      <?php endwhile; ?>
                   </div>
-
-
-
-
-
                   <!-- Nama Pelanggan -->
                   <div class="col-span-2">
                      <label for="pelanggan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pelanggan</label>
