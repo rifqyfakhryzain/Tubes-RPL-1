@@ -36,7 +36,7 @@
             <?php endif; ?>
             
             <!-- Order -->
-            <?php if (isset($_SESSION['level_dapoer']) && in_array($_SESSION['level_dapoer'], [1, 4])): ?>
+            <?php if (isset($_SESSION['level_dapoer']) && in_array($_SESSION['level_dapoer'], [1, 2, 3])): ?>
                 <li>
                     <a href="order.php" class="<?= basename($_SERVER['PHP_SELF']) == 'order.php' ? 'bg-gray-700' : '' ?> flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -49,7 +49,7 @@
             <?php endif; ?>
 
             <!-- Dapur -->
-            <?php if (isset($_SESSION['level_dapoer']) && $_SESSION['level_dapoer'] == 4): ?>
+            <?php if (isset($_SESSION['level_dapoer']) && in_array($_SESSION['level_dapoer'], [1, 4])): ?>
                 <li>
                     <a href="dapur.php" class="<?= basename($_SERVER['PHP_SELF']) == 'dapur.php' ? 'bg-gray-700' : '' ?> flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

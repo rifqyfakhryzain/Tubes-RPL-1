@@ -44,12 +44,26 @@ while ($record = mysqli_fetch_assoc($query)) {
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- Tailwind -->
-   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-   <!-- FlowBite -->
-   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+
+   <!-- Flowbite CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet" />
+
+   <!-- Flowbite JS -->
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+   <!-- Simple-DataTables (untuk Flowbite DataTable) -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
+   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
+
+<link rel="stylesheet" href="asset/css/mobile.css">
+
+
 </head>
+
+<script src="asset/js/mobile1.js"></script>
 
 <body class="min-h-screen flex flex-col">
 
@@ -87,7 +101,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
 
                ?>
-                  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <table  id="search-table" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                            <th scope="col" class="px-6 py-3">
@@ -153,18 +167,18 @@ while ($record = mysqli_fetch_assoc($query)) {
                               <td class="px-6 py-4">
                                  <?php echo $row['nama'] ?>
                               </td>
-<!-- Status -->
-<td class="px-6 py-4">
-    <?php if (!empty($row['id_bayar'])): ?>
-        <span class="inline-flex items-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
-          Sudah Dibayar
-        </span>
-    <?php else: ?>
-        <span class="inline-flex items-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
-            Belum Dibayar
-        </span>
-    <?php endif; ?>
-</td>
+                              <!-- Status -->
+                              <td class="px-6 py-4">
+                                 <?php if (!empty($row['id_bayar'])): ?>
+                                    <span class="inline-flex items-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
+                                       Sudah Dibayar
+                                    </span>
+                                 <?php else: ?>
+                                    <span class="inline-flex items-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
+                                       Belum Dibayar
+                                    </span>
+                                 <?php endif; ?>
+                              </td>
 
                               <!-- Waktu Order -->
                               <td class="px-6 py-4">
@@ -187,43 +201,43 @@ while ($record = mysqli_fetch_assoc($query)) {
 
 
 
-<?php $dibayar = !empty($row['id_bayar']); ?>
+                                    <?php $dibayar = !empty($row['id_bayar']); ?>
 
-<!-- Tombol Edit -->
-<button type="button"
-    data-modal-target="edit-modal-<?php echo $row['id_order']; ?>"
-    data-modal-toggle="edit-modal-<?php echo $row['id_order']; ?>"
-    <?php if ($dibayar) echo 'disabled'; ?>
-    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+                                    <!-- Tombol Edit -->
+                                    <button type="button"
+                                       data-modal-target="edit-modal-<?php echo $row['id_order']; ?>"
+                                       data-modal-toggle="edit-modal-<?php echo $row['id_order']; ?>"
+                                       <?php if ($dibayar) echo 'disabled'; ?>
+                                       class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
         <?php echo $dibayar
-            ? 'text-white bg-gray-400 cursor-not-allowed'
-            : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
+                              ? 'text-white bg-gray-400 cursor-not-allowed'
+                              : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
         <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-        width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-    </svg>
-</button>
+                                       <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                          width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                             d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
+                                       </svg>
+                                    </button>
 
-<?php $dibayar = !empty($row['id_bayar']); ?>
+                                    <?php $dibayar = !empty($row['id_bayar']); ?>
 
-<!-- Button Delete -->
-<button type="button"
-    data-modal-target="popup-modal-<?= $row['id_order']; ?>"
-    data-modal-toggle="popup-modal-<?= $row['id_order']; ?>"
-    <?php if ($dibayar) echo 'disabled'; ?>
-    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
+                                    <!-- Button Delete -->
+                                    <button type="button"
+                                       data-modal-target="popup-modal-<?= $row['id_order']; ?>"
+                                       data-modal-toggle="popup-modal-<?= $row['id_order']; ?>"
+                                       <?php if ($dibayar) echo 'disabled'; ?>
+                                       class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
         <?php echo $dibayar
-            ? 'text-white bg-gray-400 cursor-not-allowed'
-            : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
+                              ? 'text-white bg-gray-400 cursor-not-allowed'
+                              : 'text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'; ?>
         <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
-    <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-    </svg>
-</button>
+                                       <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                          viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                             d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                       </svg>
+                                    </button>
 
 
                                     <!-- Button password
@@ -244,6 +258,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
+<script src="asset/js/mobile2.js"></script>
                <?php
                }
                ?>
@@ -293,11 +308,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Nomor Meja -->
                   <div class="col-span-2">
                      <label for="meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
-<input type="number" name="meja" id="meja" max="30" min="1"
-   oninvalid="this.setCustomValidity('Nomor meja tidak boleh lebih dari 30')"
-   oninput="this.setCustomValidity('')"
-   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-   placeholder="Nomor meja (1–30)" required>
+                     <input type="text" name="meja" id="meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor meja" required="">
                   </div>
                   <!-- Nama Pelanggan -->
                   <div class="col-span-2">

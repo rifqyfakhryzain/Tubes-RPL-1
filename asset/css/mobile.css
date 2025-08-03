@@ -1,0 +1,63 @@
+      /* Tambahkan ini ke dalam <styl> Anda */
+      @media (max-width: 640px) {
+
+         /* Optimalkan card container */
+         .w-\[95\%\] {
+            width: 100%;
+            padding: 1rem;
+         }
+
+         /* Perbaikan tabel mobile */
+         .relative.overflow-x-auto {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+         }
+
+         #search-table {
+            display: block;
+            width: 100%;
+         }
+
+         #search-table thead {
+            display: none;
+            /* Sembunyikan header di mobile */
+         }
+
+         #search-table tbody tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+         }
+
+         #search-table tbody td {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.75rem;
+            text-align: left;
+         }
+
+
+         #search-table tbody td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            text-align: left;
+            margin-right: 1rem;
+         }
+
+         /* DataTables mobile optimization */
+         .dataTable-wrapper {
+            overflow-x: auto;
+         }
+
+         .dataTable-top,
+         .dataTable-bottom {
+            flex-direction: column;
+            gap: 0.5rem;
+         }
+
+         .dataTable-input {
+            width: 100% !important;
+         }
+      }

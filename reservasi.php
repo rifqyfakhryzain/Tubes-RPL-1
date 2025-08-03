@@ -47,12 +47,120 @@ while ($record = mysqli_fetch_assoc($query)) {
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- Tailwind -->
-   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-   <!-- FlowBite -->
-   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+
+   <!-- Flowbite CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet" />
+
+   <!-- Flowbite JS -->
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+   <!-- Simple-DataTables (untuk Flowbite DataTable) -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
+   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
+
+   <style>
+      /* Tambahkan ini ke dalam <style> Anda */
+      @media (max-width: 640px) {
+
+         /* Optimalkan card container */
+         .w-\[95\%\] {
+            width: 100%;
+            padding: 1rem;
+         }
+
+         /* Perbaikan tabel mobile */
+         .relative.overflow-x-auto {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+         }
+
+         #search-table {
+            display: block;
+            width: 100%;
+         }
+
+         #search-table thead {
+            display: none;
+            /* Sembunyikan header di mobile */
+         }
+
+         #search-table tbody tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+         }
+
+         #search-table tbody td {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.75rem;
+            text-align: left;
+         }
+
+
+         #search-table tbody td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            text-align: left;
+            margin-right: 1rem;
+         }
+
+         /* DataTables mobile optimization */
+         .dataTable-wrapper {
+            overflow-x: auto;
+         }
+
+         .dataTable-top,
+         .dataTable-bottom {
+            flex-direction: column;
+            gap: 0.5rem;
+         }
+
+         .dataTable-input {
+            width: 100% !important;
+         }
+      }
+   </style>
+
 </head>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+      const table = document.querySelector("#search-table");
+      if (table) {
+         // Tambahkan atribut data-label ke setiap td
+         const headers = Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim());
+         table.querySelectorAll("tbody tr").forEach(row => {
+            Array.from(row.querySelectorAll("td")).forEach((td, index) => {
+               td.setAttribute("data-label", headers[index] || "");
+            });
+         });
+
+         const datatable = new simpleDatatables.DataTable(table, {
+            perPage: 5, // Kurangi item per halaman untuk mobile
+            perPageSelect: [5, 10, 15],
+            labels: {
+               placeholder: "Cari meja...",
+               searchTitle: "Cari dalam tabel",
+               pageTitle: "Halaman {page}",
+               perPage: "item per halaman",
+               noRows: "Data tidak ditemukan",
+               info: "Menampilkan {start} sampai {end} dari {rows} data",
+               noResults: "Tidak ada hasil yang cocok dengan pencarian Anda",
+            }
+         });
+
+         // ... (kode styling Tailwind yang sudah ada)
+      }
+   });
+</script>
+
+
 
 <body class="min-h-screen flex flex-col">
 
@@ -80,7 +188,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                   echo "<p class='text-red-500'>Data Menu tidak ada</p>";
                } else {
                ?>
-                  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <table id="search-table" class="min-w-full w-full text-sm text-left text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                            <!-- Menu -->
@@ -129,19 +237,19 @@ while ($record = mysqli_fetch_assoc($query)) {
                               <!-- Status -->
                               <td class="px-6 py-4">
                                  <?php
-                                    if ($row['status'] == 0) {
-                                       echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300 whitespace-nowrap">
+                                 if ($row['status'] == 0) {
+                                    echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300 whitespace-nowrap">
                                        Meja Tersedia
                                        </span>';
-                                    } elseif ($row['status'] == 1) {
-                                       echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">
+                                 } elseif ($row['status'] == 1) {
+                                    echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">
                                        Meja Penuh
                                        </span>';
-                                    } else {
-                                       echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-gray-800 bg-gray-100 rounded-full dark:bg-gray-900 dark:text-gray-300 whitespace-nowrap">
+                                 } else {
+                                    echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-gray-800 bg-gray-100 rounded-full dark:bg-gray-900 dark:text-gray-300 whitespace-nowrap">
                                        Status Tidak Dikenal
                                        </span>';
-                                    }
+                                 }
                                  ?>
                               </td>
                               <!-- Aksi -->
@@ -182,12 +290,25 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                      </tbody>
                   </table>
+                  <script>
+                     document.addEventListener("DOMContentLoaded", function() {
+                        const table = document.querySelector("#search-table");
+                        if (!table) return;
+
+                        const headers = Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim());
+
+                        table.querySelectorAll("tbody tr").forEach(row => {
+                           row.querySelectorAll("td").forEach((td, i) => {
+                              td.setAttribute("data-label", headers[i]);
+                           });
+                        });
+                     });
+                  </script>
 
                <?php
                }
                ?>
             </div>
-
 
          </div>
       </div>
