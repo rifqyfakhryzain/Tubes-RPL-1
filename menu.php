@@ -55,7 +55,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
 
 </head>
-
+<script src="asset/js/mobile1.js"></script>
 <body class="min-h-screen flex flex-col">
 
    <!-- Navbar -->
