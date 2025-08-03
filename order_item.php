@@ -17,7 +17,7 @@ $hasil = mysqli_fetch_assoc($query_user);
 $id_order = isset($_GET['id_order']) ? intval($_GET['id_order']) : 0;
 
 $menu_result = [];
-$query_menu = mysqli_query($conn, "SELECT id, nama_menu FROM tabel_daftar_menu");
+$query_menu = mysqli_query($conn, "SELECT id, nama_menu,kategori FROM tabel_daftar_menu");
 
 while ($row = mysqli_fetch_assoc($query_menu)) {
     $menu_result[] = $row;
@@ -393,8 +393,8 @@ if ($id_order > 0) {
         </script>
 
 
-        <!-- Footer -->
-        <?php include "footer.php"; ?>
+      <!-- Footer -->
+      <?php include "footer.php"; ?>
 
 
     </main>
@@ -425,16 +425,57 @@ if ($id_order > 0) {
                         <input type="hidden" name="meja" value="<?php echo $meja ?>">
                         <input type="hidden" name="pelanggan" value="<?php echo $pelanggan ?>">
                         <div class="grid gap-4 mb-4 grid-cols-2">
-                            <!-- Nama Menu-->
-                            <div class="col-span-2">
-                                <select name="menu" id="menu" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option value="" disabled selected hidden>Pilih Menu</option>
-                                    <?php foreach ($menu_result as $row): ?>
-                                        <option value="<?= $row['id'] ?>"><?= $row['nama_menu'] ?></option>
-                                    <?php endforeach; ?>
+<!-- Kategori -->
+<div class="col-span-2">
+    <select name="kategori" id="kategori" required
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        <option value="" disabled selected hidden>Pilih Kategori</option>
+        <option value="1">Makanan</option>
+        <option value="2">Minuman</option>
+    </select>
+</div>
 
-                                </select>
+<!-- Nama Menu -->
+<div class="col-span-2">
+    <select name="menu" id="menu" required disabled
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        <option value="" disabled selected hidden>Pilih Menu</option>
+        <?php foreach ($menu_result as $row): ?>
+            <option value="<?= $row['id'] ?>" data-kategori="<?= $row['kategori'] ?>">
+                <?= $row['nama_menu'] ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
                             </div>
+                            
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const kategoriSelect = document.getElementById("kategori");
+    const menuSelect = document.getElementById("menu");
+
+    // Simpan semua opsi menu
+    const allMenuOptions = Array.from(menuSelect.querySelectorAll("option[data-kategori]"));
+
+    kategoriSelect.addEventListener("change", function () {
+      const selectedKategori = this.value;
+
+      // Bersihkan dan reset dropdown menu
+      menuSelect.innerHTML = '<option value="" disabled selected hidden>Pilih Menu</option>';
+
+      // Filter dan tambahkan opsi menu berdasarkan kategori
+      allMenuOptions.forEach(function (option) {
+        if (option.dataset.kategori === selectedKategori) {
+          menuSelect.appendChild(option);
+        }
+      });
+
+      // Aktifkan menu jika kategori sudah dipilih
+      menuSelect.disabled = selectedKategori === "";
+    });
+  });
+</script>
                             <!-- Jumlah Porsi -->
                             <div class="col-span-2">
                                 <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Porsi</label>

@@ -60,12 +60,7 @@ while ($record = mysqli_fetch_assoc($query)) {
    <!-- Simple-DataTables (untuk Flowbite DataTable) -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
-
 </head>
-
->
-
-
 
 <body class="min-h-screen flex flex-col">
 
@@ -195,8 +190,6 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                      </tbody>
                   </table>
-
-
                <?php
                }
                ?>
