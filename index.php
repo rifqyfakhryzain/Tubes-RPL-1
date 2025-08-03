@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (empty($_SESSION['username_dapoer'])) {
-    header('location:login.php');
-    exit();
+   header('location:login.php');
+   exit();
 }
 include 'proses/connect.php';
 
@@ -10,12 +10,13 @@ $username = $_SESSION['username_dapoer'];
 $query = mysqli_query($conn, "SELECT * FROM tabel_user WHERE username = '$username'");
 
 if ($query) {
-    $hasil = mysqli_fetch_assoc($query);
+   $hasil = mysqli_fetch_assoc($query);
 
-    if ($hasil && isset($hasil['username'])) {
-        // Misal kamu ingin simpan ke variabel saja, bukan langsung tampil
-        $namaPengguna = $hasil['username'];
-    }
+   if ($hasil && isset($hasil['username'])) {
+      // Misal kamu ingin simpan ke variabel saja, bukan langsung tampil
+      $namaPengguna = $hasil['username'];
+      $nama = $hasil['nama'];
+   }
 }
 
 ?>
@@ -53,11 +54,11 @@ if ($query) {
 
             <!-- Konten -->
             <div class="space-y-4">
-               <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                  Ini adalah halaman home
+               <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                  Selamat Datang, <?= htmlspecialchars($nama); ?> 👋
                </h2>
                <p class="text-gray-600 dark:text-gray-400">
-                  Empower Developers, IT Ops, and business teams to collaborate at high velocity. Respond to changes and deliver great customer and employee service experiences fast.
+                  Selamat datang di Dapoer Resto! Aplikasi ini membantu tim restoran dalam mengatur pesanan, mengelola menu, dan memantau operasional harian dengan mudah dan cepat.
                </p>
                <a href="#" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800 dark:text-blue-500 dark:hover:text-blue-700">
                   Learn more
@@ -70,18 +71,8 @@ if ($query) {
          </div>
       </div>
 
-
-
-
-
       <!-- Footer -->
-      <footer class="bg-white rounded-lg m-4">
-         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <span class="block text-sm text-gray-900 sm:text-center">
-               © 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
-            </span>
-         </div>
-      </footer>
+      <?php include "footer.php"; ?>
 
    </main>
    <!-- End Content -->

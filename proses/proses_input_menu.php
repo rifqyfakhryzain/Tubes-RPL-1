@@ -41,4 +41,3 @@ if (isset($_POST['input_menu_validate'])) {
 }
 
 echo $message;
-?>

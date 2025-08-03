@@ -17,4 +17,3 @@ if (isset($_POST['delete_user_validate'])) {
         echo "<script>alert('Gagal Menghapus data: " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
-?>

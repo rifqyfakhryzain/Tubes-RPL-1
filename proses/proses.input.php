@@ -41,4 +41,3 @@ if (isset($_POST['input_user_validate'])) {
 }
 
 echo $message;
-?>

@@ -35,4 +35,3 @@ if (isset($_POST['edit_order_validate'])) {
         echo "<script>alert('Gagal mengupdate Order " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
-?>

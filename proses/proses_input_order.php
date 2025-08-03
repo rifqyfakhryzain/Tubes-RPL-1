@@ -42,4 +42,3 @@ if (isset($_POST['input_order_validate'])) {
 }
 
 echo $message;
-?>

@@ -51,11 +51,10 @@ while ($record = mysqli_fetch_assoc($query)) {
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
 
-<link rel="stylesheet" href="asset/css/mobile.css">
+   <link rel="stylesheet" href="asset/css/mobile.css">
 
 
 </head>
-<script src="asset/js/mobile1.js"></script>
 <body class="min-h-screen flex flex-col">
 
    <!-- Navbar -->
@@ -76,7 +75,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
             <!-- Konten -->
             <div class="relative overflow-x-auto">
-               <div class="w-full flex justify-start sm:justify-end">
+               <div class="w-full flex justify-start sm:justify">
                   <!-- Button Tambah User -->
                   <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
@@ -202,13 +201,8 @@ while ($record = mysqli_fetch_assoc($query)) {
       </div>
 
       <!-- Footer -->
-      <footer class="bg-white rounded-lg m-4">
-         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <span class="block text-sm text-gray-900 sm:text-center">
-               © 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
-            </span>
-         </div>
-      </footer>
+      <?php include "footer.php"; ?>
+
 
    </main>
 
@@ -436,7 +430,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                         <span class="font-bold text-black dark:text-white">Nama Menu : <?php echo $row['nama_menu']; ?></span>
                      </h3>
                      <h3 class="mb-5 text-xl font-normal text-gray-500 dark:text-gray-400">
-                        <span class="font-bold text-black dark:text-white">Harga : <?php echo number_format($row['harga'],0, ',', '.') ?></span>
+                        <span class="font-bold text-black dark:text-white">Harga : <?php echo number_format($row['harga'], 0, ',', '.') ?></span>
                      </h3>
 
                      <button data-modal-hide="popup-modal-<?= $row['id']; ?>" name="delete_menu_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">

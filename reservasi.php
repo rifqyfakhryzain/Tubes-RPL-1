@@ -61,104 +61,9 @@ while ($record = mysqli_fetch_assoc($query)) {
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
 
-   <style>
-      /* Tambahkan ini ke dalam <style> Anda */
-      @media (max-width: 640px) {
-
-         /* Optimalkan card container */
-         .w-\[95\%\] {
-            width: 100%;
-            padding: 1rem;
-         }
-
-         /* Perbaikan tabel mobile */
-         .relative.overflow-x-auto {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-         }
-
-         #search-table {
-            display: block;
-            width: 100%;
-         }
-
-         #search-table thead {
-            display: none;
-            /* Sembunyikan header di mobile */
-         }
-
-         #search-table tbody tr {
-            display: block;
-            margin-bottom: 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-         }
-
-         #search-table tbody td {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0.75rem;
-            text-align: left;
-         }
-
-
-         #search-table tbody td::before {
-            content: attr(data-label);
-            font-weight: bold;
-            text-align: left;
-            margin-right: 1rem;
-         }
-
-         /* DataTables mobile optimization */
-         .dataTable-wrapper {
-            overflow-x: auto;
-         }
-
-         .dataTable-top,
-         .dataTable-bottom {
-            flex-direction: column;
-            gap: 0.5rem;
-         }
-
-         .dataTable-input {
-            width: 100% !important;
-         }
-      }
-   </style>
-
 </head>
 
-<script>
-   document.addEventListener("DOMContentLoaded", function() {
-      const table = document.querySelector("#search-table");
-      if (table) {
-         // Tambahkan atribut data-label ke setiap td
-         const headers = Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim());
-         table.querySelectorAll("tbody tr").forEach(row => {
-            Array.from(row.querySelectorAll("td")).forEach((td, index) => {
-               td.setAttribute("data-label", headers[index] || "");
-            });
-         });
-
-         const datatable = new simpleDatatables.DataTable(table, {
-            perPage: 5, // Kurangi item per halaman untuk mobile
-            perPageSelect: [5, 10, 15],
-            labels: {
-               placeholder: "Cari meja...",
-               searchTitle: "Cari dalam tabel",
-               pageTitle: "Halaman {page}",
-               perPage: "item per halaman",
-               noRows: "Data tidak ditemukan",
-               info: "Menampilkan {start} sampai {end} dari {rows} data",
-               noResults: "Tidak ada hasil yang cocok dengan pencarian Anda",
-            }
-         });
-
-         // ... (kode styling Tailwind yang sudah ada)
-      }
-   });
-</script>
+>
 
 
 
@@ -290,20 +195,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                      </tbody>
                   </table>
-                  <script>
-                     document.addEventListener("DOMContentLoaded", function() {
-                        const table = document.querySelector("#search-table");
-                        if (!table) return;
 
-                        const headers = Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim());
-
-                        table.querySelectorAll("tbody tr").forEach(row => {
-                           row.querySelectorAll("td").forEach((td, i) => {
-                              td.setAttribute("data-label", headers[i]);
-                           });
-                        });
-                     });
-                  </script>
 
                <?php
                }
@@ -314,13 +206,8 @@ while ($record = mysqli_fetch_assoc($query)) {
       </div>
 
       <!-- Footer -->
-      <footer class="bg-white rounded-lg m-4">
-         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <span class="block text-sm text-gray-900 sm:text-center">
-               © 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
-            </span>
-         </div>
-      </footer>
+      <?php include "footer.php"; ?>
+
 
    </main>
 

@@ -57,13 +57,8 @@ while ($record = mysqli_fetch_assoc($query)) {
    <!-- Simple-DataTables (untuk Flowbite DataTable) -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
-
-<link rel="stylesheet" href="asset/css/mobile.css">
-
-
 </head>
 
-<script src="asset/js/mobile1.js"></script>
 
 <body class="min-h-screen flex flex-col">
 
@@ -81,18 +76,10 @@ while ($record = mysqli_fetch_assoc($query)) {
          <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg p-10 space-y-6">
 
             <!-- Judul About -->
-            <h3 class="text-1xl font-bold text-grey-900 dark:text-white">Halaman Order</h3>
+            <h3 class="text-1xl font-bold text-grey-900 dark:text-white">Halaman Report</h3>
 
             <!-- Konten -->
             <div class="relative overflow-x-auto">
-               <div class="w-full flex justify-start sm:justify-end">
-                  <!-- Button Tambah User -->
-                  <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                     Tambah Order
-                  </button>
-               </div>
-
                <?php
                if (empty($result)) {
                   echo "Data Menu tidak ada";
@@ -208,7 +195,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
-                  <script src="asset/js/mobile2.js"></script>
 
                <?php
                }
@@ -220,13 +206,8 @@ while ($record = mysqli_fetch_assoc($query)) {
       </div>
 
       <!-- Footer -->
-      <footer class="bg-white rounded-lg m-4">
-         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <span class="block text-sm text-gray-900 sm:text-center">
-               © 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
-            </span>
-         </div>
-      </footer>
+      <?php include "footer.php"; ?>
+
 
    </main>
 </body>

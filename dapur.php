@@ -196,8 +196,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                                                     data-modal-toggle="terima-modal-<?php echo $row['id_list_order']; ?>"
                                                     class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
                                                     <?php echo ($status == 0)
-                                                    ? 'text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:outline-none'
-                                                    : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
+                                                        ? 'text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:outline-none'
+                                                        : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
                                                     <?php echo ($status == 1) ? 'disabled' : ''; ?>>
                                                     Terima
                                                 </button>
@@ -208,8 +208,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                                                     data-modal-toggle="siapsaji-modal-<?php echo $row['id_list_order']  ?>"
                                                     class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
                                                     <?php echo ($status == 1)
-                                                    ? 'text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:outline-none'
-                                                    : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
+                                                        ? 'text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:outline-none'
+                                                        : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
                                                     <?php echo ($status == 0) ? 'disabled' : ''; ?>>
                                                     Siap Saji
                                                 </button>
@@ -254,7 +254,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Dapur 
+                            Dapur
                         </h3>
 
                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="terima-modal-<?php echo $row['id_list_order']; ?>">

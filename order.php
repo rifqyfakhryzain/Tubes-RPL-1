@@ -58,12 +58,10 @@ while ($record = mysqli_fetch_assoc($query)) {
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
 
-<link rel="stylesheet" href="asset/css/mobile.css">
 
 
 </head>
 
-<script src="asset/js/mobile1.js"></script>
 
 <body class="min-h-screen flex flex-col">
 
@@ -85,7 +83,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
             <!-- Konten -->
             <div class="relative overflow-x-auto">
-               <div class="w-full flex justify-start sm:justify-end">
+               <div class="w-full flex justify-start sm:justify">
                   <!-- Button Tambah User -->
                   <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
@@ -95,13 +93,13 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                <?php
                if (empty($result)) {
-                  echo "Data Menu tidak ada";
+                  echo "<p class='text-red-500'>Data Menu tidak ada</p>";
                } else {
 
 
 
                ?>
-                  <table  id="search-table" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <table id="search-table" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                            <th scope="col" class="px-6 py-3">
@@ -258,7 +256,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
-<script src="asset/js/mobile2.js"></script>
                <?php
                }
                ?>
@@ -269,13 +266,8 @@ while ($record = mysqli_fetch_assoc($query)) {
       </div>
 
       <!-- Footer -->
-      <footer class="bg-white rounded-lg m-4">
-         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <span class="block text-sm text-gray-900 sm:text-center">
-               © 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
-            </span>
-         </div>
-      </footer>
+      <?php include "footer.php"; ?>
+
 
    </main>
 

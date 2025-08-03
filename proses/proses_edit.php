@@ -39,4 +39,3 @@ if (isset($_POST['edit_user_validate'])) {
         echo "<script>alert('Gagal mengupdate data: " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
-?>

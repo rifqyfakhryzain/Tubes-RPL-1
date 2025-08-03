@@ -15,17 +15,16 @@ if (isset($_POST['delete_order_item_validate'])) {
 
     $query = mysqli_query($conn, "DELETE FROM tabel_list_order WHERE id_list_order = '$id'");
 
-        if ($query) {
-            $message = '<script>
+    if ($query) {
+        $message = '<script>
                 alert("Item berhasil dihapus.");
                 window.location.href = "../order_item.php?id_order=' . $kode_order . '";
             </script>';
-        } else {
-            $message = '<script>
+    } else {
+        $message = '<script>
                 alert("gagal mengahpus item : ' . mysqli_error($conn) . '");
                 window.history.back();
             </script>';
-        }
+    }
 }
 echo $message;
-?>

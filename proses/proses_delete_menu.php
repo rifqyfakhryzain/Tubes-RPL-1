@@ -17,4 +17,3 @@ if (isset($_POST['delete_menu_validate'])) {
         echo "<script>alert('Gagal Menghapus Menu " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
-?>

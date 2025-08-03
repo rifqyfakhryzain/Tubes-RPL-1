@@ -19,7 +19,7 @@ if (isset($_POST['edit_menu_validate'])) {
                     keterangan='$keterangan', 
                     harga='$harga', 
                     kategori='$kategori'
-                  WHERE id='$id'";  
+                  WHERE id='$id'";
 
     $query = mysqli_query($conn, $query_str); // Eksekusi query
 
@@ -29,4 +29,3 @@ if (isset($_POST['edit_menu_validate'])) {
         echo "<script>alert('Gagal mengupdate Menu: " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
-?>

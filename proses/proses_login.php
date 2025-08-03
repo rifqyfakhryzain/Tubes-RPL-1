@@ -23,4 +23,3 @@ if (!empty($_POST['submit_validasi'])) {
               </script>";
     }
 }
-?>

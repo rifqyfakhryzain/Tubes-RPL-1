@@ -17,4 +17,3 @@ if (isset($_POST['delete_order_validate'])) {
         echo "<script>alert('Gagal Menghapus Order " . mysqli_error($conn) . "'); window.history.back();</script>";
     }
 }
-?>
