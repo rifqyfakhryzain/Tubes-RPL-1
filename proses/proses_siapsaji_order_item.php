@@ -14,7 +14,7 @@ $message = "";
 
 if (isset($_POST['siapsaji_order_item_validate'])) {
         // INSERT ke database
-        $query = mysqli_query($conn, "UPDATE tabel_list_order SET catatan='$catatan', status=0 WHERE id_list_order = '$id'");
+        $query = mysqli_query($conn, "UPDATE tabel_list_order SET catatan='$catatan', status=2 WHERE id_list_order = '$id'");
 
         if ($query) {
             $message = '<script>
