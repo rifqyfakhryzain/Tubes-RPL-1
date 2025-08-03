@@ -306,7 +306,6 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Nomor Meja -->
                   <div class="grid grid-cols-5 gap-2">
                      <?php
-
                      $query_meja = mysqli_query($conn, "SELECT id_meja, no_meja FROM tabel_reservasi WHERE status != 1 ORDER BY no_meja ASC");
                      while ($row = mysqli_fetch_assoc($query_meja)) :
                         $id_meja = htmlspecialchars($row['id_meja']);
@@ -369,12 +368,13 @@ while ($record = mysqli_fetch_assoc($query)) {
                         <label for="kode_order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Order</label>
                         <input type="text" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="" value="<?php echo $row['kode_order'] ?>">
                      </div>
+                     
 <!-- Edit Nomor Meja -->
 <div class="col-span-2">
   <label for="no_meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
   <div class="grid grid-cols-5 gap-2">
     <?php
-    $query_meja = mysqli_query($conn, "SELECT id_meja, no_meja FROM tabel_reservasi ORDER BY no_meja ASC");
+    $query_meja = mysqli_query($conn, "SELECT id_meja, no_meja FROM tabel_reservasi WHERE status != 1 ORDER BY no_meja ASC");
     while ($meja = mysqli_fetch_assoc($query_meja)) :
       $id_meja = htmlspecialchars($meja['id_meja']);
       $no_meja = htmlspecialchars($meja['no_meja']);
@@ -389,6 +389,7 @@ while ($record = mysqli_fetch_assoc($query)) {
     <?php endwhile; ?>
   </div>
 </div>
+
 
                      <!-- Nama Pelanggan -->
                      <div class="col-span-2">
