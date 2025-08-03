@@ -293,7 +293,11 @@ while ($record = mysqli_fetch_assoc($query)) {
                   <!-- Nomor Meja -->
                   <div class="col-span-2">
                      <label for="meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
-                     <input type="text" name="meja" id="meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor meja" required="">
+<input type="number" name="meja" id="meja" max="30" min="1"
+   oninvalid="this.setCustomValidity('Nomor meja tidak boleh lebih dari 30')"
+   oninput="this.setCustomValidity('')"
+   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+   placeholder="Nomor meja (1–30)" required>
                   </div>
                   <!-- Nama Pelanggan -->
                   <div class="col-span-2">
