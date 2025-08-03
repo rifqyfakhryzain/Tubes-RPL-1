@@ -168,16 +168,16 @@ while ($record = mysqli_fetch_assoc($query)) {
                                         <td class="px-6 py-4">
                                             <?php
                                             if ($row['status'] == 0) {
-                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300 whitespace-nowrap">
+                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-full whitespace-nowrap">
                                                 Belum Masuk Ke Dapur
                                                 </span>';
                                             } elseif ($row['status'] == 1) {
-                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-yellow-800 bg-yellow-100 rounded-full dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">
+                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-white bg-yellow-500 rounded-full whitespace-nowrap">
                                                 Masuk ke Dapur
                                                 </span>';
                                             } else {
-                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-gray-800 bg-gray-100 rounded-full dark:bg-gray-900 dark:text-gray-300 whitespace-nowrap">
-                                                Status Tidak Dikenal
+                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded-full whitespace-nowrap">
+                                                Siap DiSajikan
                                                 </span>';
                                             }
                                             ?>
@@ -195,7 +195,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                                                     data-modal-toggle="terima-modal-<?php echo $row['id_list_order']; ?>"
                                                     class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
                                                     <?php echo ($status == 0)
-                                                    ? 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 focus:outline-none'
+                                                    ? 'text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:outline-none'
                                                     : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
                                                     <?php echo ($status == 1) ? 'disabled' : ''; ?>>
                                                     Terima
