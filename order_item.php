@@ -31,10 +31,10 @@ $waktu_order = '';
 
 if ($id_order > 0) {
     // Ambil informasi order (kode_order, meja, pelanggan)
-    $q_info = mysqli_query($conn, "SELECT kode_order, meja,waktu_order, pelanggan FROM tabel_order WHERE id_order = $id_order");
+    $q_info = mysqli_query($conn, "SELECT kode_order, no_meja,waktu_order, pelanggan FROM tabel_order WHERE id_order = $id_order");
     if ($info = mysqli_fetch_assoc($q_info)) {
         $kode = $info['kode_order'];
-        $meja = $info['meja'];
+        $meja = $info['no_meja'];
         $pelanggan = $info['pelanggan'];
         $waktu_order = $info['waktu_order'];
     }

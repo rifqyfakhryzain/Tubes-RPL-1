@@ -20,6 +20,12 @@ $username = $_SESSION['username_dapoer'];
 $query_user = mysqli_query($conn, "SELECT * FROM tabel_user WHERE username = '$username'");
 $hasil = mysqli_fetch_assoc($query_user);
 
+// Reservasi Meja
+// Ambil data nomor meja dari tabel_reservasi
+$query_meja = mysqli_query($conn, "SELECT DISTINCT no_meja FROM tabel_reservasi ORDER BY no_meja ASC");
+
+
+
 // Data untuk tabel semua user
 $result = [];
 $query = mysqli_query($conn, "SELECT tabel_order.*,tabel_bayar.*,nama, SUM(harga*jumlah) AS harganya FROM tabel_order
@@ -154,7 +160,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               </td>
                               <!-- Meja -->
                               <td class="px-6 py-4">
-                                 <?php echo $row['meja'] ?>
+                                 <?php echo $row['no_meja'] ?>
 
                               </td>
                               <!-- Total Harga -->
@@ -298,10 +304,26 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <input type="text" readonly value="<?php echo date('ymdHi') . rand(1, 10) ?>" name="kode_order" id="kode_order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Order" required="">
                   </div>
                   <!-- Nomor Meja -->
-                  <div class="col-span-2">
-                     <label for="meja" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Meja</label>
-                     <input type="text" name="meja" id="meja" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor meja" required="">
+                  <div class="grid grid-cols-5 gap-2">
+                     <?php
+                     $query_meja = mysqli_query($conn, "SELECT id_meja, no_meja FROM tabel_reservasi ORDER BY no_meja ASC");
+                     while ($row = mysqli_fetch_assoc($query_meja)) :
+                        $id_meja = htmlspecialchars($row['id_meja']);
+                        $no_meja = htmlspecialchars($row['no_meja']);
+                     ?>
+                        <label class="cursor-pointer">
+                           <input type="radio" name="no_meja" value="<?= $id_meja ?>" class="peer hidden" required>
+                           <div class="p-2 text-center rounded-lg border border-gray-300 peer-checked:bg-blue-500 peer-checked:text-white hover:bg-blue-100">
+                              <?= $no_meja ?>
+                           </div>
+                        </label>
+                     <?php endwhile; ?>
                   </div>
+
+
+
+
+
                   <!-- Nama Pelanggan -->
                   <div class="col-span-2">
                      <label for="pelanggan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pelanggan</label>

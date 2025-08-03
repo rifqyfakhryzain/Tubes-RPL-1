@@ -154,7 +154,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               </td>
                               <!-- Pelayan -->
                               <td class="px-6 py-4">
-                                 <?php echo $row['meja'] ?>
+                                 <?php echo $row['no_meja'] ?>
                               </td>
                               <!-- Total Harga -->
                               <td class="px-6 py-4">

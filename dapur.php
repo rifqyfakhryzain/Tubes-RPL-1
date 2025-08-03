@@ -26,7 +26,7 @@ $result = [];
 $query = mysqli_query($conn, "
 SELECT 
     tabel_order.kode_order, 
-    tabel_order.meja, 
+    tabel_order.no_meja, 
     tabel_order.pelanggan,
     tabel_order.waktu_order,
     tabel_list_order.id_list_order,
@@ -136,7 +136,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                                 <?php
                                 $no = 1;
                                 foreach ($result as $row) {
-                                    if ($row['id_list_order'] == 0) continue;
+                                    // if ($row['id_list_order'] == 0) continue;
                                 ?>
 
 
@@ -185,34 +185,46 @@ while ($record = mysqli_fetch_assoc($query)) {
                                         </td>
                                         </td>
                                         <!-- Aksi -->
+                                         
                                         <td class="px-6 py-4">
                                             <div class="flex gap-2">
                                                 <?php
                                                 $status = $row['status'];
                                                 ?>
-                                                <!-- Tombol TERIMA -->
-                                                <button type="button"
-                                                    data-modal-target="terima-modal-<?php echo $row['id_list_order']; ?>"
-                                                    data-modal-toggle="terima-modal-<?php echo $row['id_list_order']; ?>"
-                                                    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
-                                                    <?php echo ($status == 0)
-                                                        ? 'text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:outline-none'
-                                                        : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
-                                                    <?php echo ($status == 1) ? 'disabled' : ''; ?>>
-                                                    Terima
-                                                </button>
 
-                                                <!-- Tombol SIAP SAJI -->
-                                                <button type="button"
-                                                    data-modal-target="siapsaji-modal-<?php echo $row['id_list_order']  ?>"
-                                                    data-modal-toggle="siapsaji-modal-<?php echo $row['id_list_order']  ?>"
-                                                    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
-                                                    <?php echo ($status == 1)
-                                                        ? 'text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:outline-none'
-                                                        : 'text-white bg-gray-400 cursor-not-allowed'; ?>"
-                                                    <?php echo ($status == 0) ? 'disabled' : ''; ?>>
-                                                    Siap Saji
-                                                </button>
+                                                <!-- Cek Jumlah dan nama menu -->
+                                                 <?php
+$status = $row['status'];
+$jumlah = intval($row['jumlah']); // konversi untuk aman
+$disableTerima = ($status == 1 || $jumlah == 0) ? 'disabled' : '';
+$disableSaji   = ($status == 0 || $jumlah == 0) ? 'disabled' : '';
+
+$kelasTerima = ($status == 0 && $jumlah > 0)
+    ? 'text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 focus:outline-none'
+    : 'text-white bg-gray-400 cursor-not-allowed';
+
+$kelasSaji = ($status == 1 && $jumlah > 0)
+    ? 'text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:outline-none'
+    : 'text-white bg-gray-400 cursor-not-allowed';
+?>
+
+<!-- Tombol TERIMA -->
+<button type="button"
+    data-modal-target="terima-modal-<?php echo $row['id_list_order']; ?>"
+    data-modal-toggle="terima-modal-<?php echo $row['id_list_order']; ?>"
+    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2 <?php echo $kelasTerima; ?>"
+    <?php echo $disableTerima; ?>>
+    Terima
+</button>
+
+<!-- Tombol SIAP SAJI -->
+<button type="button"
+    data-modal-target="siapsaji-modal-<?php echo $row['id_list_order']; ?>"
+    data-modal-toggle="siapsaji-modal-<?php echo $row['id_list_order']; ?>"
+    class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2 <?php echo $kelasSaji; ?>"
+    <?php echo $disableSaji; ?>>
+    Siap Saji
+</button>
 
                                             </div>
                                         </td>
