@@ -136,6 +136,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                                 <?php
                                 $no = 1;
                                 foreach ($result as $row) {
+                                    if ($row['id_list_order'] == 0) continue;
                                 ?>
 
 
