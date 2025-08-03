@@ -37,12 +37,23 @@ while ($record = mysqli_fetch_assoc($query)) {
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- Tailwind -->
-   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-   <!-- FlowBite -->
-   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-   <link rel="stylesheet" href="asset/css/mobile.css">
+
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+
+   <!-- Flowbite CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet" />
+
+   <!-- Flowbite JS -->
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+   <!-- Simple-DataTables (untuk Flowbite DataTable) -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
+   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
+
+<link rel="stylesheet" href="asset/css/mobile.css">
+
+
 </head>
 
 <body class="min-h-screen flex flex-col">
