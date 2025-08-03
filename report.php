@@ -44,12 +44,26 @@ while ($record = mysqli_fetch_assoc($query)) {
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!-- Tailwind -->
-   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-   <!-- FlowBite -->
-   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+
+   <!-- Flowbite CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet" />
+
+   <!-- Flowbite JS -->
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+   <!-- Simple-DataTables (untuk Flowbite DataTable) -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
+   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
+
+<link rel="stylesheet" href="asset/css/mobile.css">
+
+
 </head>
+
+<script src="asset/js/mobile1.js"></script>
 
 <body class="min-h-screen flex flex-col">
 
@@ -87,7 +101,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
 
                ?>
-                  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <table id="search-table" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                            <th scope="col" class="px-6 py-3">
@@ -194,6 +208,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
+                  <script src="asset/js/mobile2.js"></script>
+
                <?php
                }
                ?>
