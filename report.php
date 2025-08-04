@@ -191,9 +191,9 @@
                                           </button>
                                        <?php endif; ?>
                                     </div>
+                                    <?php $dibayar = !empty($row['id_bayar']); ?>
                                  </td>
                                  
-                                 <?php $dibayar = !empty($row['id_bayar']); ?>
 
 
 
