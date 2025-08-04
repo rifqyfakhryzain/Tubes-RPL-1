@@ -190,8 +190,8 @@
                                              </svg>
                                           </button>
                                        <?php endif; ?>
+                                       <?php $dibayar = !empty($row['id_bayar']); ?>
                                     </div>
-                                    <?php $dibayar = !empty($row['id_bayar']); ?>
                                  </td>
                                  
 
