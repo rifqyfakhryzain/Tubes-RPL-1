@@ -648,7 +648,7 @@ if ($id_order > 0) {
                             <!-- Kategori -->
                             <div class="col-span-2">
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
-                                <select disabled name="kategori" class="kategori-edit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                                <select  name="kategori" class="kategori-edit bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                                     <option value="" disabled hidden <?= (!isset($row['kategori']) ? 'selected' : '') ?>>Pilih Kategori</option>
                                     <option value="1" <?= (isset($row['kategori']) && $row['kategori'] == 1) ? 'selected' : '' ?>>Makanan</option>
                                     <option value="2" <?= (isset($row['kategori']) && $row['kategori'] == 2) ? 'selected' : '' ?>>Minuman</option>
