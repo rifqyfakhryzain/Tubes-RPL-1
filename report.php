@@ -82,7 +82,7 @@ while ($record = mysqli_fetch_assoc($query)) {
             <div class="relative overflow-x-auto">
                <?php
                if (empty($result)) {
-                  echo "Data Menu tidak ada";
+                  echo "<p class='text-red-500'>Data Menu tidak ada</p>";
                } else {
 
 
