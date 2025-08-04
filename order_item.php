@@ -166,6 +166,10 @@ if ($id_order > 0) {
                                     <th scope="col" class="px-6 py-3">
                                         Catatan
                                     </th>
+                                    <!-- Status -->
+                                    <th scope="col" class="px-6 py-3">
+                                        Status
+                                    </th>
                                     <!-- Total -->
                                     <th scope="col" class="px-6 py-3">
                                         Total
@@ -201,6 +205,23 @@ if ($id_order > 0) {
                                         <td class="px-6 py-4">
                                             <?php echo $row['catatan'] ?>
                                         </td>
+                                                                                <!-- Status -->
+                                        <td class="px-6 py-4">
+                                            <?php
+                                            if ($row['status'] == 0) {
+                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-full whitespace-nowrap">
+                                                Belum Masuk Ke Dapur
+                                                </span>';
+                                            } elseif ($row['status'] == 1) {
+                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-white bg-yellow-500 rounded-full whitespace-nowrap">
+                                                Masuk ke Dapur
+                                                </span>';
+                                            } elseif ($row['status'] == 2) {
+                                                echo '<span class="inline-block min-w-[130px] text-center px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded-full whitespace-nowrap">
+                                                Siap DiSajikan
+                                                </span>';
+                                            }
+                                            ?>
                                         <!-- Total Harga -->
                                         <td class="px-6 py-4">
                                             <?php echo number_format($row['harganya'], 0, ',', '.') ?>
@@ -258,7 +279,7 @@ if ($id_order > 0) {
                                     $total += $row['harganya'];
                                 } ?>
                                 <!-- Total Harga -->
-                                <td class="px-6 py-4" colspan="4">
+                                <td class="px-6 py-4" colspan="5">
                                     <b>Total Harga</b>
                                 </td>
                                 <!-- Total Harga -->
