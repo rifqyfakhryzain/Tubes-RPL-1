@@ -58,7 +58,7 @@ if ($query) {
                   Selamat Datang, <?= htmlspecialchars($nama); ?> 👋
                </h2>
                <p class="text-gray-600 dark:text-gray-400">
-                  Selamat datang di Dapoer Resto! Aplikasi ini membantu tim restoran dalam mengatur pesanan, mengelola menu, dan memantau operasional harian dengan mudah dan cepat.
+                  Selamat datang di Dapoer Resto! Aplikasi ini membantu tim restoran dalam mengatur pesanan, mengelola menu, dan memantau operasional harian dengan mudah dan c
                </p>
             </div>
 
