@@ -101,7 +101,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               Nama Menu
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              Keterangan
+                              
                            </th>
                            <th scope="col" class="px-6 py-3">
                               Kategori
