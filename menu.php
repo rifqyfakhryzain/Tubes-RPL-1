@@ -98,7 +98,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               No
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              Nama 
+                              Nama Menu
                            </th>
                            <th scope="col" class="px-6 py-3">
                               Keterangan
