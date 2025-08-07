@@ -107,7 +107,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               Kategori
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              
+                              Harga
                            </th>
                            <th scope="col" class="px-6 py-3">
                               Aksi
