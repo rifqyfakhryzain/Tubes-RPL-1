@@ -100,7 +100,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               Nama
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              
+                              Username
                            </th>
                            <th scope="col" class="px-6 py-3">
                               Level
