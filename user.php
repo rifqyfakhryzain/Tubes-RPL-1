@@ -106,7 +106,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               Level
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              
+                              No 
                            </th>
                            <th scope="col" class="px-6 py-3">
                               Aksi
