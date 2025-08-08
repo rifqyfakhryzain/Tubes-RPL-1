@@ -109,7 +109,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                               No HP
                            </th>
                            <th scope="col" class="px-6 py-3">
-                              
+                              Aksi
                            </th>
                         </tr>
                      </thead>
