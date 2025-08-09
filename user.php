@@ -461,7 +461,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <!-- Validasi Tidak bisa Hapus Akun Sendiri -->
                      <?php if ($row['username'] == $_SESSION['username_dapoer']): ?>
                         <h3 class="mb-5 text-lg font-normal text-red-600 dark:text-red-400">
-                           Anda     .
+                                .
                         </h3>
                      <?php else: ?>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
