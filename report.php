@@ -101,7 +101,7 @@
                                  Waktu Order
                               </th>
                               <th scope="col" class="px-6 py-3">
-                                 Waktu 
+                                 Waktu Bayar
                               </th>
                               <th scope="col" class="px-6 py-3">
                                  Pelanggan
