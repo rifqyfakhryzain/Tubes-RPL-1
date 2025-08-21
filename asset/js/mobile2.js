@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   table.querySelectorAll("tbody tr").forEach((row) => {
-    row.querySelectorAll("td").forEach((td, i) => {
-      td.setAttribute("data-label", headers[i]);
+    row.querySelectorAll("th, td").forEach((cell, i) => {
+      if (headers[i]) {
+        cell.setAttribute("data-label", headers[i]);
+      }
     });
   });
 });
