@@ -206,6 +206,8 @@
                            } ?>
                         </tbody>
                      </table>
+                     <!-- Tampilan Mobile Js -->
+                     <script src="asset/js/mobile.js"></script>
 
                   <?php
                   }
