@@ -194,6 +194,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
+                  <!-- Tampilan Mobile Js -->
+                  <script src="asset/js/mobile.js"></script>
                <?php
                }
                ?>
