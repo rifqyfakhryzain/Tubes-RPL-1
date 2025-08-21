@@ -60,6 +60,8 @@ while ($record = mysqli_fetch_assoc($query)) {
    <!-- Simple-DataTables (untuk Flowbite DataTable) -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
+      <link rel="stylesheet" href="asset/css/mobile.css">
+
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -190,6 +192,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                      </tbody>
                   </table>
+                  <script src="asset/js/mobile_meja.js"></script>
                <?php
                }
                ?>
@@ -243,7 +246,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                      <!-- catatan -->
                      <div class="col-span-2">
                         <label for="catatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catatan</label>
-                        <input type="text" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="" value="<?php echo $row['catatan'] ?>">
+                        <input type="text" disabled="catatan" name="catatan" id="catatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Catatan" required="" value="<?php echo $row['catatan'] ?>">
                      </div>
                   </div>
                   <!-- SUbmit -->
