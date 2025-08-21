@@ -51,6 +51,7 @@ while ($record = mysqli_fetch_assoc($query)) {
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
 
+   <!-- Css Mobile -->
    <link rel="stylesheet" href="asset/css/mobile.css">
 
 
@@ -189,7 +190,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
-                  <script src="asset/js/mobile_menu.js"></script>
+                  <script src="asset/js/mobile.js"></script>
 
                <?php
                }

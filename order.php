@@ -64,6 +64,10 @@ while ($record = mysqli_fetch_assoc($query)) {
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
 
+   <!-- Css Mobile -->
+   <link rel="stylesheet" href="asset/css/mobile.css">
+
+
 
 
 </head>
@@ -213,10 +217,10 @@ while ($record = mysqli_fetch_assoc($query)) {
                                        data-modal-toggle="edit-modal-<?php echo $row['id_order']; ?>"
                                        <?php if ($dibayar) echo 'disabled'; ?>
                                        class="flex items-center justify-center gap-2 font-medium rounded-lg text-sm px-4 py-2
-        <?php echo $dibayar
-                              ? 'text-white bg-gray-400 cursor-not-allowed'
-                              : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
-        <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
+                                       <?php echo $dibayar
+                                          ? 'text-white bg-gray-400 cursor-not-allowed'
+                                          : 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800'; ?>
+                                       <?php echo $dibayar ? '' : 'focus:outline-none'; ?>">
                                        <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                           width="24" height="24" fill="none" viewBox="0 0 24 24">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -262,6 +266,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
+                  <!-- Tampilan Mobile Js -->
+                  <script src="asset/js/mobile.js"></script>
                <?php
                }
                ?>

@@ -60,7 +60,9 @@ while ($record = mysqli_fetch_assoc($query)) {
    <!-- Simple-DataTables (untuk Flowbite DataTable) -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
-      <link rel="stylesheet" href="asset/css/mobile.css">
+   
+   <!-- Css Mobile -->
+   <link rel="stylesheet" href="asset/css/mobile.css">
 
 </head>
 
@@ -192,7 +194,7 @@ while ($record = mysqli_fetch_assoc($query)) {
 
                      </tbody>
                   </table>
-                  <script src="asset/js/mobile_meja.js"></script>
+                  <script src="asset/js/mobile.js"></script>
                <?php
                }
                ?>
