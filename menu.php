@@ -189,7 +189,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                         } ?>
                      </tbody>
                   </table>
-                  <script src="asset/js/mobile2.js"></script>
+                  <script src="asset/js/mobile_menu.js"></script>
 
                <?php
                }
