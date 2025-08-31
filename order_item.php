@@ -69,6 +69,7 @@ if ($id_order > 0) {
     <!-- FlowBite -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="asset/css/mobile.css">
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -147,7 +148,7 @@ if ($id_order > 0) {
 
 
                     ?>
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <table id="search-table" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <!-- Menu -->
@@ -383,6 +384,8 @@ if ($id_order > 0) {
                         <td><b>Rp <?php echo number_format($total, 0, ',', '.'); ?></b></td>
                     </tr>
                 </tfoot>
+                <!-- Tampilan Mobike Js -->
+                 <script src="asset/js/mobile.js"></script>
             </table>
         </div>
 
