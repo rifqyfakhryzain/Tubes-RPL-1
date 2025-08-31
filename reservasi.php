@@ -60,7 +60,7 @@ while ($record = mysqli_fetch_assoc($query)) {
    <!-- Simple-DataTables (untuk Flowbite DataTable) -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" defer></script>
-   
+
    <!-- Css Mobile -->
    <link rel="stylesheet" href="asset/css/mobile.css">
 
@@ -126,14 +126,12 @@ while ($record = mysqli_fetch_assoc($query)) {
                         ?>
 
 
-                           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                              data-no="<?= $no; ?>">
+                              <!-- No -->
+                              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-label="no">
                                  <?= $no++; ?>
                               </th>
-                              <!-- No Meja -->
-                              <td class="px-6 py-4">
-                                 <?php echo $row['no_meja'] ?>
-                              </td>
                               <!-- Catatan -->
                               <td class="px-6 py-4">
                                  <?php echo $row['catatan'] ?>
