@@ -475,7 +475,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                            Apakah anda yakin menghapus user
                            <span class="font-bold text-black dark:text-white"><?php echo $row['nama']; ?></span>
                         </h3>
-                        <button data-modal-hide="popup-modal-<?= $row['id']; ?>" name="delete_user_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                        <button data-modal-hide="popup-modal-<?= $row['id']; ?>" name="delete_user_validate" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" disabled>
                            Hapus
                         </button>
                      <?php endif; ?>
