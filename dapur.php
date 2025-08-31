@@ -67,7 +67,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
     <!-- Css Mobile -->
-   <link rel="stylesheet" href="asset/css/mobile.css">
+    <link rel="stylesheet" href="asset/css/mobile.css">
 
 </head>
 
@@ -144,9 +144,11 @@ while ($row = mysqli_fetch_assoc($query)) {
                                 ?>
 
 
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                    <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"> -->
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                                        data-no="<?= $no; ?>"> 
                                         <!-- No -->
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-label="no">
                                             <?= $no++; ?>
                                         </th>
                                         <!-- Kode Order -->
